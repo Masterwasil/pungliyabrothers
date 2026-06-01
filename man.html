@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menswear | Pungliya Brothers | Luxury Ethnic Fashion</title>
+    
+    <!-- Fonts: Playfair Display for luxury headings, Jost for clean modern body text -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'pb-dark': '#0a0a0a',        // Deepest charcoal
+                        'pb-dark-light': '#1a1a1a',  // Lighter charcoal for cards
+                        'pb-gold': '#c5a059',        // Sophisticated metallic gold
+                        'pb-gold-light': '#d4b475',
+                        'pb-light': '#f9f8f6',       // Off-white/beige background
+                        'pb-gray': '#e5e5e5',        // Soft borders
+                        'pb-text': '#333333'
+                    },
+                    fontFamily: {
+                        'serif': ['"Playfair Display"', 'serif'],
+                        'sans': ['"Jost"', 'sans-serif'],
+                    },
+                    spacing: {
+                        '128': '32rem',
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'slow-zoom': 'slowZoom 10s linear infinite alternate',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        slowZoom: {
+                            '0%': { transform: 'scale(1)' },
+                            '100%': { transform: 'scale(1.05)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #c5a059; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #d4b475; }
+
+        /* Hide scrollbar for horizontal scrolling containers but keep functionality */
+        .hide-scroll::-webkit-scrollbar { display: none; }
+        .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Glassmorphism utilities */
+        .glass {
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(197, 160, 89, 0.1);
+        }
+
+        /* Image Hover Reveal */
+        .product-card .secondary-img {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .product-card:hover .secondary-img { opacity: 1; }
+        .product-card:hover .primary-img { opacity: 0; }
+
+        /* Mega Menu Hover */
+        .nav-item:hover .mega-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .mega-menu {
+            transition: all 0.3s ease-in-out;
+            transform: translateY(10px);
+        }
+
+        /* Intersection Observer Animation Class */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Category Filter Active State */
+        .category-filter.active {
+            color: #c5a059;
+            border-bottom: 1px solid #c5a059;
+        }
+    </style>
+</head>
+<body class="font-sans bg-pb-dark text-pb-light antialiased overflow-x-hidden">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-pb-gold text-pb-dark text-xs uppercase tracking-[0.2em] font-semibold text-center py-2 relative z-50">
+        <span>Complimentary Global Shipping on orders over ₹40,000 | Discover the Groom's Edit</span>
+    </div>
+
+    <!-- Header -->
+    <header class="fixed w-full top-[32px] z-40 transition-all duration-300" id="main-header">
+        <div class="glass w-full">
+            <div class="container mx-auto px-4 md:px-8">
+                <div class="flex items-center justify-between h-20">
+                    
+                    <!-- Mobile Menu Button -->
+                    <div class="md:hidden flex items-center">
+                        <button id="mobile-menu-btn" class="text-pb-light hover:text-pb-gold transition p-2">
+                            <i class="fas fa-bars text-xl"></i>
+                        </button>
+                    </div>
+
+                    <!-- Logo -->
+                    <div class="flex-shrink-0 flex items-center justify-center flex-1 md:flex-none">
+                        <a href="index.html" class="font-serif text-2xl md:text-3xl tracking-widest text-pb-gold uppercase font-bold text-center">
+                            Pungliya <span class="font-light text-pb-light block text-[10px] md:text-xs tracking-[0.4em] mt-1">Brothers</span>
+                        </a>
+                    </div>
+
+                    <!-- Desktop Navigation -->
+                    <nav class="hidden md:flex space-x-8 items-center h-full">
+                        <!-- Men (Active) -->
+                        <div class="nav-item relative h-full flex items-center">
+                            <a href="man.html" class="text-sm uppercase tracking-wider text-pb-gold transition font-medium">Men</a>
+                            <!-- Mega Menu -->
+                            <div class="mega-menu absolute top-full left-0 w-max bg-pb-dark-light border border-pb-gold/20 p-8 shadow-2xl opacity-0 invisible flex gap-12 z-50">
+                                <div>
+                                    <h4 class="font-serif text-pb-gold mb-4 text-lg">Categories</h4>
+                                    <ul class="space-y-3 text-sm text-gray-300">
+                                        <li><a href="man.html?category=Sherwanis" class="hover:text-pb-gold transition">Sherwanis</a></li>
+                                        <li><a href="man.html?category=Indo-Western" class="hover:text-pb-gold transition">Indo-Western</a></li>
+                                        <li><a href="man.html?category=Kurta Sets" class="hover:text-pb-gold transition">Kurta Sets</a></li>
+                                        <li><a href="man.html?category=Jodhpuri Suits" class="hover:text-pb-gold transition">Jodhpuri Suits</a></li>
+                                        <li><a href="man.html?category=Nehru Jackets" class="hover:text-pb-gold transition">Nehru Jackets</a></li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="font-serif text-pb-gold mb-4 text-lg">Collections</h4>
+                                    <ul class="space-y-3 text-sm text-gray-300">
+                                        <li><a href="#" class="hover:text-pb-gold transition">Royal Wedding</a></li>
+                                        <li><a href="#" class="hover:text-pb-gold transition">Festive Edit</a></li>
+                                        <li><a href="#" class="hover:text-pb-gold transition">Minimalist</a></li>
+                                    </ul>
+                                </div>
+                                <div class="w-64">
+                                    <img src="s1.png" alt="Menswear" class="w-full h-48 object-cover rounded-sm mb-3 object-top">
+                                    <a href="#" class="text-sm uppercase tracking-widest text-pb-gold border-b border-pb-gold pb-1 hover:text-white transition">Shop The Look</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Groom Wear & Festive Edit -->
+                        <div class="nav-item relative h-full flex items-center">
+                            <a href="#" class="text-sm uppercase tracking-wider hover:text-pb-gold transition font-medium">Groom Wear</a>
+                        </div>
+                        <div class="nav-item relative h-full flex items-center">
+                            <a href="#" class="text-sm uppercase tracking-wider hover:text-pb-gold transition font-medium">Festive Edit</a>
+                        </div>
+                        <div class="nav-item relative h-full flex items-center"><a href="#" class="text-sm uppercase tracking-wider text-pb-gold transition font-medium border border-pb-gold px-4 py-2 hover:bg-pb-gold hover:text-pb-dark">Book Appointment</a></div>
+                    </nav>
+
+                    <!-- Icons -->
+                    <div class="flex items-center space-x-5 md:space-x-6">
+                        <button class="hover:text-pb-gold transition"><i class="fas fa-search text-lg"></i></button>
+                        <button class="hidden md:block hover:text-pb-gold transition"><i class="far fa-user text-lg"></i></button>
+                        <button class="hidden md:block hover:text-pb-gold transition relative"><i class="far fa-heart text-lg"></i></button>
+                        <button id="cart-open-btn" class="hover:text-pb-gold transition relative">
+                            <i class="fas fa-shopping-bag text-lg"></i>
+                            <span class="absolute -top-2 -right-2 bg-pb-gold text-pb-dark text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Sidebar -->
+    <div id="mobile-sidebar" class="fixed inset-0 z-50 bg-pb-dark/95 backdrop-blur-md transform -translate-x-full transition-transform duration-300 md:hidden">
+        <div class="flex justify-between items-center p-6 border-b border-pb-gold/20">
+            <span class="font-serif text-xl text-pb-gold tracking-widest uppercase">Menu</span>
+            <button id="mobile-close-btn" class="text-white hover:text-pb-gold text-2xl">&times;</button>
+        </div>
+        <div class="p-6 flex flex-col space-y-6 text-lg uppercase tracking-wider">
+            <a href="#" class="text-pb-gold">Men</a>
+            <a href="#" class="hover:text-pb-gold">Groom Wear</a>
+            <a href="#" class="hover:text-pb-gold">Festive Edit</a>
+            <a href="#" class="text-pb-gold">Book Appointment</a>
+            <div class="border-t border-pb-gold/20 pt-6 mt-4 flex space-x-6">
+                <a href="#" class="hover:text-pb-gold"><i class="far fa-user"></i> Account</a>
+                <a href="#" class="hover:text-pb-gold"><i class="far fa-heart"></i> Wishlist</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Men's Hero Section -->
+    <section class="relative h-[70vh] w-full overflow-hidden bg-pb-dark mt-20 md:mt-24">
+        <div class="absolute inset-0 bg-black/60 z-10"></div>
+        <img src="SH1.png" alt="Menswear Collection" class="w-full h-full object-cover object-top animate-slow-zoom">
+        <div class="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-4">
+            <p class="text-pb-gold tracking-[0.3em] uppercase text-sm mb-4 animate-fade-in-up" style="animation-delay: 0.1s;">The Modern Gentleman</p>
+            <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl text-white mb-6 animate-fade-in-up" style="animation-delay: 0.3s;">The Groom's Edit</h1>
+            <p class="text-gray-300 font-light max-w-2xl mx-auto mb-8 animate-fade-in-up" style="animation-delay: 0.5s;">Discover our curated collection of over 70 meticulously crafted Sherwanis, Indo-Western sets, and Kurtas designed for royalty.</p>
+        </div>
+    </section>
+
+    <!-- Products Section with Category Links -->
+    <section class="py-16 bg-pb-dark-light min-h-screen" id="collection-grid">
+        <div class="container mx-auto px-4">
+            
+            <!-- Category Link Header -->
+            <div class="flex flex-col items-center mb-12 reveal">
+                <h2 class="font-serif text-3xl md:text-4xl text-white mb-8">Menswear Collection</h2>
+                
+                <!-- Filter Links -->
+                <div class="flex flex-wrap justify-center gap-6 border-b border-gray-700 pb-4 w-full max-w-4xl" id="category-filters">
+                    <!-- Links directly triggering category views -->
+                    <a href="#" data-filter="All" class="category-filter active uppercase tracking-widest text-sm font-semibold transition hover:text-pb-gold pb-1">All Products</a>
+                    <a href="#" data-filter="Sherwanis" class="category-filter text-gray-500 hover:text-white uppercase tracking-widest text-sm transition pb-1">Sherwanis</a>
+                    <a href="#" data-filter="Indo-Western" class="category-filter text-gray-500 hover:text-white uppercase tracking-widest text-sm transition pb-1">Indo-Western</a>
+                    <a href="#" data-filter="Kurta Sets" class="category-filter text-gray-500 hover:text-white uppercase tracking-widest text-sm transition pb-1">Kurta Sets</a>
+                    <a href="#" data-filter="Jodhpuri Suits" class="category-filter text-gray-500 hover:text-white uppercase tracking-widest text-sm transition pb-1">Jodhpuri Suits</a>
+                    <a href="#" data-filter="Nehru Jackets" class="category-filter text-gray-500 hover:text-white uppercase tracking-widest text-sm transition pb-1">Nehru Jackets</a>
+                </div>
+            </div>
+
+            <!-- Dynamic Product Grid -->
+            <!-- JavaScript will populate exactly 75 products here based on the constraints -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="dynamic-product-grid">
+                <!-- Content injected via JS -->
+            </div>
+            
+            <!-- Loading/More (UI element) -->
+            <div class="text-center mt-16 pb-8">
+                <p class="text-gray-500 text-sm tracking-widest uppercase mb-4" id="product-count-text">Showing all products</p>
+                <div class="w-16 h-px bg-pb-gold mx-auto"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Drawer -->
+    <div id="cart-overlay" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 opacity-0 invisible transition-all duration-300"></div>
+    <div id="cart-drawer" class="fixed top-0 right-0 h-full w-full md:w-[450px] bg-pb-dark-light shadow-2xl z-50 transform translate-x-full transition-transform duration-500 ease-in-out flex flex-col border-l border-pb-gold/20">
+        <div class="p-6 flex justify-between items-center border-b border-gray-800">
+            <h2 class="font-serif text-2xl text-pb-gold">Shopping Bag</h2>
+            <button id="cart-close-btn" class="text-gray-400 hover:text-white transition text-xl"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="flex-1 flex items-center justify-center p-6">
+            <div class="text-center">
+                <i class="fas fa-shopping-bag text-4xl text-gray-700 mb-4"></i>
+                <p class="text-gray-400">Your bag is currently empty.</p>
+                <a href="#" onclick="document.getElementById('cart-close-btn').click();" class="inline-block mt-4 text-pb-gold border-b border-pb-gold text-sm tracking-widest uppercase pb-1">Continue Shopping</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick View Modal -->
+    <div id="quick-view-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[60] flex items-center justify-center opacity-0 invisible transition-all duration-300 p-4">
+        <div class="bg-pb-dark-light w-full max-w-5xl rounded-sm shadow-2xl overflow-hidden flex flex-col md:flex-row max-h-[90vh] transform scale-95 transition-transform duration-300 relative border border-pb-gold/20" id="quick-view-content">
+            <button onclick="closeQuickView()" class="absolute top-4 right-4 z-10 w-10 h-10 bg-black/50 rounded-full text-white hover:bg-pb-gold transition flex items-center justify-center"><i class="fas fa-times"></i></button>
+            
+            <div class="w-full md:w-1/2 bg-black p-8 flex items-center justify-center relative">
+                <img id="qv-image" src="" alt="Product" class="max-h-[60vh] object-contain">
+            </div>
+            
+            <div class="w-full md:w-1/2 p-8 md:p-12 overflow-y-auto hide-scroll text-left">
+                <div class="flex items-center text-pb-gold text-xs mb-2 space-x-1">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <h2 id="qv-title" class="font-serif text-3xl text-white mb-2">Title</h2>
+                <p id="qv-price" class="text-2xl text-pb-gold mb-6">Price</p>
+                
+                <p class="text-gray-400 text-sm font-light leading-relaxed mb-6">Experience uncompromising luxury with this masterfully tailored piece. Expertly crafted with heritage embroidery and premium fabrics tailored to perfection.</p>
+                
+                <div class="mb-6">
+                    <div class="flex justify-between mb-2">
+                        <span class="text-sm text-white uppercase tracking-wider">Size</span>
+                        <a href="#" class="text-xs text-pb-gold underline">Size Guide</a>
+                    </div>
+                    <div class="flex space-x-3">
+                        <button class="w-10 h-10 border border-gray-600 text-gray-300 hover:border-pb-gold hover:text-pb-gold transition">38</button>
+                        <button class="w-10 h-10 border border-pb-gold text-pb-gold bg-pb-gold/10 transition">40</button>
+                        <button class="w-10 h-10 border border-gray-600 text-gray-300 hover:border-pb-gold hover:text-pb-gold transition">42</button>
+                        <button class="w-10 h-10 border border-gray-600 text-gray-300 hover:border-pb-gold hover:text-pb-gold transition">44</button>
+                        <button class="px-4 h-10 border border-gray-600 text-gray-300 hover:border-pb-gold hover:text-pb-gold transition text-sm">Custom</button>
+                    </div>
+                </div>
+
+                <div class="flex space-x-4 mb-8">
+                    <button class="flex-1 bg-pb-gold text-pb-dark py-3 uppercase tracking-widest text-sm font-bold hover:bg-white transition duration-300">Add to Bag</button>
+                    <button class="w-12 h-12 border border-gray-600 text-gray-300 flex items-center justify-center hover:border-pb-gold hover:text-pb-gold transition rounded-sm"><i class="far fa-heart"></i></button>
+                </div>
+                
+                <div class="border-t border-gray-800 pt-6 text-sm text-gray-400 space-y-3">
+                    <p><i class="fas fa-truck text-pb-gold w-6"></i> Ships in 4-6 weeks (Made to order)</p>
+                    <p><i class="fas fa-undo text-pb-gold w-6"></i> 7-Day Return Policy</p>
+                    <p><i class="fab fa-whatsapp text-pb-gold w-6"></i> <a href="#" class="hover:text-pb-gold transition border-b border-transparent hover:border-pb-gold">Chat with a Stylist</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="relative py-32 bg-fixed bg-center bg-cover" style="background-image: url('SH3.png');">
+        <div class="absolute inset-0 bg-black/60"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-2xl mx-auto text-center reveal">
+                <i class="fas fa-crown text-pb-gold text-3xl mb-6"></i>
+                <h2 class="font-serif text-4xl md:text-5xl text-white mb-6 leading-tight">Crafting Legacy, <br>One Thread at a Time.</h2>
+                <p class="text-gray-300 font-light text-lg mb-8 leading-relaxed">For over three decades, Pungliya Brothers has been synonymous with unparalleled craftsmanship and royal aesthetics. Experience the magic of intricate zardosi, rich brocades, and timeless silhouettes.</p>
+                <button class="bg-pb-gold text-pb-dark px-8 py-3 uppercase tracking-widest text-sm font-semibold hover:bg-white transition duration-300">Read Our Story</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#050505] pt-20 pb-10 border-t border-pb-gold/30">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-20 reveal">
+                <h3 class="font-serif text-3xl text-pb-gold mb-4">Join The Inner Circle</h3>
+                <p class="text-gray-400 font-light mb-8">Subscribe to receive exclusive access to new men's collections, bespoke services, and styling editorials.</p>
+                <form class="flex flex-col sm:flex-row gap-4" onsubmit="event.preventDefault();">
+                    <input type="email" placeholder="Email Address" required class="flex-1 bg-transparent border-b border-gray-700 px-4 py-3 text-white focus:outline-none focus:border-pb-gold transition rounded-none">
+                    <button type="submit" class="bg-pb-gold text-pb-dark px-8 py-3 uppercase tracking-widest text-sm font-bold hover:bg-white transition">Subscribe</button>
+                </form>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16 border-t border-gray-800 pt-16">
+                <div>
+                    <h2 class="font-serif text-2xl text-pb-gold tracking-widest uppercase font-bold mb-6">Pungliya <br><span class="font-light text-white text-xs tracking-[0.4em]">Brothers</span></h2>
+                    <p class="text-gray-400 font-light text-sm leading-relaxed mb-6">Defining luxury Indian ethnic wear since 1990. Celebrating the modern bride and groom with timeless craftsmanship.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center text-gray-400 hover:text-pb-gold hover:border-pb-gold transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center text-gray-400 hover:text-pb-gold hover:border-pb-gold transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center text-gray-400 hover:text-pb-gold hover:border-pb-gold transition"><i class="fab fa-pinterest-p"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center text-gray-400 hover:text-pb-gold hover:border-pb-gold transition"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-white uppercase tracking-widest text-sm font-semibold mb-6">Men's Shop</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm font-light">
+                        <li><a href="#" class="hover:text-pb-gold transition">All Menswear</a></li>
+                        <li><a href="#" class="hover:text-pb-gold transition">Sherwanis</a></li>
+                        <li><a href="#" class="hover:text-pb-gold transition">Indo-Western</a></li>
+                        <li><a href="#" class="hover:text-pb-gold transition">Kurta Sets</a></li>
+                        <li><a href="#" class="hover:text-pb-gold transition">Men's Accessories</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white uppercase tracking-widest text-sm font-semibold mb-6">Customer Care</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm font-light">
+                        <li><a href="#" class="hover:text-pb-gold transition">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-pb-gold transition">Shipping & Returns</a></li>
+                        <li><a href="#" class="hover:text-pb-gold transition">Order Tracking</a></li>
+                        <li><a href="#" class="hover:text-pb-gold transition">Size Guide</a></li>
+                        <li><a href="#" class="hover:text-pb-gold transition">Book Appointment</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white uppercase tracking-widest text-sm font-semibold mb-6">Flagship Store</h4>
+                    <address class="text-gray-400 text-sm font-light not-italic leading-relaxed mb-4">
+                        123 Luxury Boulevard,<br>
+                        Jubilee Hills, Hyderabad,<br>
+                        Telangana 500033, India
+                    </address>
+                    <p class="text-gray-400 text-sm font-light mb-2"><i class="fas fa-phone mr-2 text-pb-gold"></i> +91 98765 43210</p>
+                    <p class="text-gray-400 text-sm font-light"><i class="fas fa-envelope mr-2 text-pb-gold"></i> concierge@pungliyabrothers.com</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
+                <p>&copy; 2026 Pungliya Brothers. All Rights Reserved.</p>
+                <div class="flex space-x-4 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white transition">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition">Terms of Service</a>
+                </div>
+                <div class="flex space-x-3 mt-4 md:mt-0 text-xl text-gray-600">
+                    <i class="fab fa-cc-visa hover:text-white transition"></i>
+                    <i class="fab fa-cc-mastercard hover:text-white transition"></i>
+                    <i class="fab fa-cc-amex hover:text-white transition"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script for Dynamic Product Rendering & Core Logic -->
+    <script>
+        // Highly optimized data array to generate 75 distinct products efficiently
+        // Format: [Name, Price Number, Category, ImageSetIndex, BadgeText (optional)]
+        const productData = [
+            // --- SHERWANIS (15) ---
+            ["Royal Ivory Silk Sherwani", 185000, "Sherwanis", 0, "Bestseller"],
+            ["Midnight Blue Zardosi Sherwani", 210000, "Sherwanis", 1],
+            ["Emerald Velvet Hand-Embroidered Sherwani", 245000, "Sherwanis", 2, "New Arrival"],
+            ["Charcoal Black Brocade Sherwani", 175000, "Sherwanis", 3],
+            ["Champagne Gold Heavy Sherwani", 260000, "Sherwanis", 4],
+            ["Ruby Red Royal Groom Sherwani", 195000, "Sherwanis", 0],
+            ["Pearl White Classic Sherwani", 150000, "Sherwanis", 1],
+            ["Dusty Rose Floral Threadwork Sherwani", 220000, "Sherwanis", 2, "Editor's Pick"],
+            ["Onyx Black Minimalist Sherwani", 145000, "Sherwanis", 3],
+            ["Sapphire Blue Silk Sherwani", 188000, "Sherwanis", 4],
+            ["Mint Green Pastel Sherwani", 175000, "Sherwanis", 0],
+            ["Maroon Velvet Heritage Sherwani", 275000, "Sherwanis", 1, "Limited Edition"],
+            ["Mustard Yellow Haldi Sherwani", 135000, "Sherwanis", 2],
+            ["Teal Zardosi Crafted Sherwani", 230000, "Sherwanis", 3],
+            ["Silver Grey Contemporary Sherwani", 190000, "Sherwanis", 4],
+
+            // --- INDO-WESTERN (15) ---
+            ["Asymmetric Midnight Blue Set", 95000, "Indo-Western", 1, "Trending"],
+            ["Emerald Draped Kurta Set", 85000, "Indo-Western", 2],
+            ["Ivory Layered Indo-Western Suit", 110000, "Indo-Western", 3],
+            ["Charcoal Black Fusion Suit", 105000, "Indo-Western", 4],
+            ["Maroon Pleated Indo-Western", 98000, "Indo-Western", 0, "New"],
+            ["Peach Geometric Fusion Set", 88000, "Indo-Western", 1],
+            ["Teal Velvet Asymmetric Bandhgala", 125000, "Indo-Western", 2],
+            ["Dusty Rose Cowl Drape Set", 92000, "Indo-Western", 3],
+            ["Sapphire Layered Silk Jacket Set", 115000, "Indo-Western", 4],
+            ["Onyx Textured Indo-Western", 89000, "Indo-Western", 0],
+            ["Champagne Hand-Worked Draped Set", 135000, "Indo-Western", 1],
+            ["Mint Green Floral Fusion Kurta", 78000, "Indo-Western", 2],
+            ["Ruby Red Velvet Indo-Western", 145000, "Indo-Western", 3, "Bestseller"],
+            ["Silver Grey Silk Asymmetric Kurta", 82000, "Indo-Western", 4],
+            ["Mustard Yellow Indo-Western Jacket", 95000, "Indo-Western", 0],
+
+            // --- KURTA SETS (15) ---
+            ["Ivory Chikankari Kurta Set", 45000, "Kurta Sets", 2, "Bestseller"],
+            ["Midnight Blue Mirror Work Kurta", 55000, "Kurta Sets", 3],
+            ["Emerald Threadwork Silk Kurta", 48000, "Kurta Sets", 4],
+            ["Charcoal Solid Linen Kurta", 25000, "Kurta Sets", 0],
+            ["Dusty Rose Floral Printed Kurta", 35000, "Kurta Sets", 1],
+            ["Maroon Lucknowi Kurta Set", 52000, "Kurta Sets", 2],
+            ["Peach Silk Blend Kurta", 28000, "Kurta Sets", 3],
+            ["Teal Embroidered Festive Kurta", 42000, "Kurta Sets", 4],
+            ["Mustard Yellow Haldi Kurta Set", 32000, "Kurta Sets", 0, "Popular"],
+            ["Sapphire Blue Zardosi Collar Kurta", 65000, "Kurta Sets", 1],
+            ["Onyx Black Sequin Kurta", 58000, "Kurta Sets", 2],
+            ["Champagne Gold Brocade Kurta", 72000, "Kurta Sets", 3],
+            ["Ruby Red Raw Silk Kurta", 46000, "Kurta Sets", 4],
+            ["Mint Green Summer Kurta Set", 26000, "Kurta Sets", 0],
+            ["Silver Grey Draped Kurta", 54000, "Kurta Sets", 1],
+
+            // --- JODHPURI SUITS (15) ---
+            ["Classic Black Jodhpuri Suit", 85000, "Jodhpuri Suits", 3, "Must Have"],
+            ["Midnight Blue Velvet Bandhgala", 115000, "Jodhpuri Suits", 4],
+            ["Ivory Textured Jodhpuri", 95000, "Jodhpuri Suits", 0],
+            ["Emerald Green Embroidered Bandhgala", 125000, "Jodhpuri Suits", 1, "Editor's Pick"],
+            ["Maroon Royal Jodhpuri Suit", 105000, "Jodhpuri Suits", 2],
+            ["Charcoal Grey Classic Jodhpuri", 88000, "Jodhpuri Suits", 3],
+            ["Teal Brocade Bandhgala Suit", 135000, "Jodhpuri Suits", 4],
+            ["Champagne Silk Jodhpuri", 110000, "Jodhpuri Suits", 0],
+            ["Dusty Rose Modern Bandhgala", 92000, "Jodhpuri Suits", 1],
+            ["Sapphire Blue Textured Bandhgala", 108000, "Jodhpuri Suits", 2],
+            ["Ruby Red Velvet Jodhpuri", 145000, "Jodhpuri Suits", 3],
+            ["Onyx Black Zardosi Bandhgala", 165000, "Jodhpuri Suits", 4],
+            ["Mint Green Summer Jodhpuri", 78000, "Jodhpuri Suits", 0],
+            ["Silver Metallic Bandhgala", 120000, "Jodhpuri Suits", 1],
+            ["Mustard Velvet Trim Jodhpuri", 98000, "Jodhpuri Suits", 2],
+
+            // --- NEHRU JACKETS (15) ---
+            ["Ivory Floral Silk Bandi", 28000, "Nehru Jackets", 4],
+            ["Midnight Blue Quilted Nehru Jacket", 32000, "Nehru Jackets", 0, "Trending"],
+            ["Emerald Mirror Work Jacket", 45000, "Nehru Jackets", 1],
+            ["Charcoal Brocade Bandi Set", 38000, "Nehru Jackets", 2],
+            ["Maroon Velvet Nehru Jacket", 42000, "Nehru Jackets", 3],
+            ["Dusty Rose Threadwork Bandi", 35000, "Nehru Jackets", 4],
+            ["Teal Hand-Painted Nehru Jacket", 48000, "Nehru Jackets", 0],
+            ["Champagne Zardosi Bandi", 65000, "Nehru Jackets", 1, "Premium"],
+            ["Sapphire Blue Printed Jacket", 25000, "Nehru Jackets", 2],
+            ["Ruby Red Silk Bandi", 30000, "Nehru Jackets", 3],
+            ["Onyx Black Textured Jacket", 34000, "Nehru Jackets", 4],
+            ["Mint Green Lucknowi Bandi", 44000, "Nehru Jackets", 0],
+            ["Peach Embroidered Nehru Jacket", 36000, "Nehru Jackets", 1],
+            ["Mustard Yellow Haldi Bandi", 26000, "Nehru Jackets", 2],
+            ["Silver Sequined Party Bandi", 52000, "Nehru Jackets", 3]
+        ];
+
+        // Dynamic category-based image mapping pulling from local files
+        const categoryImages = {
+            "Sherwanis": [ ["SH1.png", "SH2.png"], ["SH2.png", "SH3.png"], ["SH3.png", "SH1.png"], ["SH1.png", "SH3.png"], ["SH2.png", "SH1.png"] ],
+            "Indo-Western": [ ["indowestern1.png", "indowestern2.png"], ["indowestern2.png", "indowestern3.png"], ["indowestern3.png", "indowestern1.png"], ["indowestern1.png", "indowestern3.png"], ["indowestern2.png", "indowestern1.png"] ],
+            "Kurta Sets": [ ["kp1.png", "kp2.png"], ["kp2.png", "kp3.png"], ["kp3.png", "kp1.png"], ["kp1.png", "kp3.png"], ["kp2.png", "kp1.png"] ],
+            "Jodhpuri Suits": [ ["s1.png", "s2.png"], ["s3.png", "s4.png"], ["s5.png", "s1.png"], ["s2.png", "s4.png"], ["s4.png", "s5.png"] ],
+            "Nehru Jackets": [ ["s5.png", "s4.png"], ["s3.png", "s2.png"], ["s1.png", "s5.png"], ["s4.png", "s1.png"], ["s2.png", "s3.png"] ]
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            const productGrid = document.getElementById('dynamic-product-grid');
+            const productCountText = document.getElementById('product-count-text');
+            
+            // Generate and inject products based on filter
+            function renderProducts(categoryFilter = "All") {
+                productGrid.innerHTML = '';
+                let delayCounter = 0;
+                let renderedCount = 0;
+
+                productData.forEach((item, index) => {
+                    const [title, price, category, imgIndex, badge] = item;
+                    
+                    if (categoryFilter !== "All" && category !== categoryFilter) return;
+                    
+                    renderedCount++;
+                    
+                    // Match the correct local image pair by looking up the category dictionary
+                    const catImgs = categoryImages[category] || categoryImages["Sherwanis"]; // fallback gracefully
+                    const images = catImgs[imgIndex % catImgs.length];
+                    const delay = (delayCounter % 4) * 0.1;
+                    delayCounter++;
+
+                    // Format price with Indian commas
+                    const formattedPrice = new Intl.NumberFormat('en-IN').format(price);
+
+                    const cardHTML = `
+                        <div class="product-card group relative reveal active" style="transition-delay: ${delay}s;" data-category="${category}">
+                            <!-- Product Image Link Wrap -->
+                            <a href="#" class="block product-link">
+                                <div class="relative overflow-hidden aspect-[3/4] bg-gray-900">
+                                    <img src="${images[0]}" alt="${title}" class="primary-img absolute inset-0 w-full h-full object-cover transition-opacity duration-500 object-top">
+                                    <img src="${images[1]}" alt="${title} Detail" class="secondary-img absolute inset-0 w-full h-full object-cover object-top">
+                                    
+                                    ${badge ? `<div class="absolute top-4 left-4 bg-pb-gold text-pb-dark text-[10px] uppercase font-bold px-2 py-1 tracking-wider z-10">${badge}</div>` : ''}
+                                    
+                                    <!-- Action Buttons -->
+                                    <div class="absolute bottom-4 left-0 w-full flex justify-center space-x-4 opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 z-20">
+                                        <button class="w-10 h-10 bg-white/90 backdrop-blur text-pb-dark rounded-full flex items-center justify-center hover:bg-pb-gold hover:text-white transition shadow-lg tooltip-trigger" onclick="event.preventDefault(); openQuickView('${title}', '${formattedPrice}', '${images[0]}')">
+                                            <i class="far fa-eye"></i>
+                                        </button>
+                                        <button class="w-10 h-10 bg-white/90 backdrop-blur text-pb-dark rounded-full flex items-center justify-center hover:bg-pb-gold hover:text-white transition shadow-lg tooltip-trigger" onclick="event.preventDefault(); alert('Added to wishlist');">
+                                            <i class="far fa-heart"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="pt-4 text-center">
+                                    <h3 class="font-serif text-lg text-white group-hover:text-pb-gold transition cursor-pointer">${title}</h3>
+                                    <p class="text-pb-gold mt-1">₹ ${formattedPrice}</p>
+                                </div>
+                            </a>
+                        </div>
+                    `;
+                    productGrid.innerHTML += cardHTML;
+                });
+                
+                // Update text below grid based on filter count
+                productCountText.innerText = `Showing ${renderedCount} ${categoryFilter === 'All' ? 'products' : categoryFilter}`;
+            }
+
+            // Category Filter Click Logic
+            const filterLinks = document.querySelectorAll('.category-filter');
+            filterLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    // Update active state visuals
+                    filterLinks.forEach(l => {
+                        l.classList.remove('active', 'text-pb-gold');
+                        l.classList.add('text-gray-500');
+                        l.style.borderBottom = 'none';
+                    });
+                    e.target.classList.add('active');
+                    e.target.classList.remove('text-gray-500');
+
+                    const category = e.target.getAttribute('data-filter');
+                    renderProducts(category);
+                    
+                    // Optional: Update URL dynamically without reloading page
+                    const newUrl = new URL(window.location);
+                    newUrl.searchParams.set('category', category);
+                    window.history.pushState({}, '', newUrl);
+                });
+            });
+
+            // --- URL Parameter Reading Logic (CRITICAL for mega menu redirection) ---
+            const urlParams = new URLSearchParams(window.location.search);
+            const categoryFromUrl = urlParams.get('category');
+            
+            if (categoryFromUrl) {
+                // If a category is in the URL, find the matching button and click it
+                const targetFilterBtn = document.querySelector(`.category-filter[data-filter="${categoryFromUrl}"]`);
+                if (targetFilterBtn) {
+                    targetFilterBtn.click(); // This automatically highlights the button and calls renderProducts()
+                } else {
+                    renderProducts('All'); // Fallback if invalid URL parameter is given
+                }
+                
+                // Automatically scroll down to the product section gracefully if redirected
+                setTimeout(() => {
+                    document.getElementById('collection-grid').scrollIntoView({ behavior: 'smooth' });
+                }, 500);
+            } else {
+                // Initial Render of all items if no URL parameters are found
+                renderProducts('All');
+            }
+
+            // --- Sticky Header Logic ---
+            const header = document.getElementById('main-header');
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 50) {
+                    header.classList.add('shadow-lg', 'bg-pb-dark/90');
+                    header.style.top = '0';
+                } else {
+                    header.classList.remove('shadow-lg', 'bg-pb-dark/90');
+                    header.style.top = '32px';
+                }
+            });
+
+            // --- Mobile Menu ---
+            document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+                document.getElementById('mobile-sidebar').classList.remove('-translate-x-full');
+            });
+            document.getElementById('mobile-close-btn').addEventListener('click', () => {
+                document.getElementById('mobile-sidebar').classList.add('-translate-x-full');
+            });
+
+            // --- Cart Logic ---
+            const cartDrawer = document.getElementById('cart-drawer');
+            const cartOverlay = document.getElementById('cart-overlay');
+            
+            function toggleCart(show) {
+                if(show) {
+                    cartDrawer.classList.remove('translate-x-full');
+                    cartOverlay.classList.replace('opacity-0', 'opacity-100');
+                    cartOverlay.classList.replace('invisible', 'visible');
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    cartDrawer.classList.add('translate-x-full');
+                    cartOverlay.classList.replace('opacity-100', 'opacity-0');
+                    cartOverlay.classList.replace('visible', 'invisible');
+                    document.body.style.overflow = '';
+                }
+            }
+            document.getElementById('cart-open-btn').addEventListener('click', () => toggleCart(true));
+            document.getElementById('cart-close-btn').addEventListener('click', () => toggleCart(false));
+            cartOverlay.addEventListener('click', () => toggleCart(false));
+
+            // --- Reveal Animations ---
+            const revealOnScroll = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
+
+            // Note: Since grid items are rendered dynamically, we observe the static headers
+            document.querySelectorAll('.reveal').forEach(el => revealOnScroll.observe(el));
+        });
+
+        // --- Quick View Logic (Global for onclick attributes) ---
+        const quickViewModal = document.getElementById('quick-view-modal');
+        const quickViewContent = document.getElementById('quick-view-content');
+
+        window.openQuickView = function(title, price, img) {
+            document.getElementById('qv-title').innerText = title;
+            document.getElementById('qv-price').innerText = `₹ ${price}`;
+            document.getElementById('qv-image').src = img;
+
+            quickViewModal.classList.replace('opacity-0', 'opacity-100');
+            quickViewModal.classList.replace('invisible', 'visible');
+            setTimeout(() => quickViewContent.classList.replace('scale-95', 'scale-100'), 50);
+            document.body.style.overflow = 'hidden';
+        }
+
+        window.closeQuickView = function() {
+            quickViewContent.classList.replace('scale-100', 'scale-95');
+            setTimeout(() => {
+                quickViewModal.classList.replace('opacity-100', 'opacity-0');
+                quickViewModal.classList.replace('visible', 'invisible');
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        quickViewModal.addEventListener('click', (e) => {
+            if (e.target === quickViewModal) closeQuickView();
+        });
+    </script>
+</body>
+</html>

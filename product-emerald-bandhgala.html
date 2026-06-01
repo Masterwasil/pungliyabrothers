@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emerald Velvet Bandhgala | Pungliya Brothers</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'pb-dark': '#0a0a0a',        // Deepest charcoal
+                        'pb-dark-light': '#1a1a1a',  // Lighter charcoal for cards
+                        'pb-gold': '#c5a059',        // Sophisticated metallic gold
+                        'pb-gold-light': '#d4b475',
+                        'pb-light': '#f9f8f6',       // Off-white/beige background
+                        'pb-gray': '#e5e5e5',        // Soft borders
+                        'pb-text': '#333333',
+                        'wa-green': '#25D366'        // WhatsApp Brand Color
+                    },
+                    fontFamily: {
+                        'serif': ['"Playfair Display"', 'serif'],
+                        'sans': ['"Jost"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #c5a059; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #d4b475; }
+
+        /* Hide scrollbar for horizontal scrolling containers */
+        .hide-scroll::-webkit-scrollbar { display: none; }
+        .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Glassmorphism utilities */
+        .glass {
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(197, 160, 89, 0.1);
+        }
+
+        /* Mega Menu Hover */
+        .nav-item:hover .mega-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .mega-menu {
+            transition: all 0.3s ease-in-out;
+            transform: translateY(10px);
+        }
+
+        /* Image Gallery Transition */
+        #main-product-image {
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        /* Accordion transition */
+        .accordion-content {
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+            max-height: 0;
+            overflow: hidden;
+        }
+        .accordion-content.open {
+            max-height: 500px;
+        }
+
+        /* Toast Animation */
+        @keyframes slideInUp {
+            from { transform: translateY(100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+        .toast-enter { animation: slideInUp 0.4s ease-out forwards; }
+        .toast-exit { animation: fadeOut 0.4s ease-out forwards; }
+    </style>
+</head>
+<body class="font-sans bg-pb-dark text-pb-light antialiased overflow-x-hidden pt-28">
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-[100] flex flex-col gap-3 pointer-events-none"></div>
+
+    <!-- Header -->
+    <header class="fixed w-full top-0 z-50 transition-all duration-300 glass" id="main-header">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-pb-light hover:text-pb-gold transition p-2">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center justify-center flex-1 md:flex-none">
+                    <a href="index.html" class="font-serif text-2xl md:text-3xl tracking-widest text-pb-gold uppercase font-bold text-center">
+                        Pungliya <span class="font-light text-pb-light block text-[10px] md:text-xs tracking-[0.4em] mt-1">Brothers</span>
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-8 items-center h-full">
+                    <div class="nav-item relative h-full flex items-center">
+                        <a href="index.html" class="text-sm uppercase tracking-wider text-pb-gold transition font-medium">Men</a>
+                        <!-- Mega Menu Snippet -->
+                        <div class="mega-menu absolute top-full left-0 w-max bg-pb-dark-light border border-pb-gold/20 p-8 shadow-2xl opacity-0 invisible flex gap-12 z-50">
+                            <div>
+                                <h4 class="font-serif text-pb-gold mb-4 text-lg">Categories</h4>
+                                <ul class="space-y-3 text-sm text-gray-300">
+                                    <li><a href="index.html?category=Sherwanis" class="hover:text-pb-gold transition">Sherwanis</a></li>
+                                    <li><a href="index.html?category=Indo-Western" class="hover:text-pb-gold transition">Indo-Western</a></li>
+                                    <li><a href="index.html?category=Kurta Sets" class="hover:text-pb-gold transition">Kurta Sets</a></li>
+                                    <li><a href="index.html?category=Jodhpuri Suits" class="hover:text-pb-gold transition">Jodhpuri Suits</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="nav-item relative h-full flex items-center"><a href="#" class="text-sm uppercase tracking-wider hover:text-pb-gold transition font-medium">Groom Wear</a></div>
+                    <div class="nav-item relative h-full flex items-center"><a href="#" class="text-sm uppercase tracking-wider hover:text-pb-gold transition font-medium">Festive Edit</a></div>
+                    <div class="nav-item relative h-full flex items-center"><a href="#" class="text-sm uppercase tracking-wider text-pb-gold transition font-medium border border-pb-gold px-4 py-2 hover:bg-pb-gold hover:text-pb-dark">Book Appointment</a></div>
+                </nav>
+
+                <!-- Icons -->
+                <div class="flex items-center space-x-5 md:space-x-6">
+                    <button class="hover:text-pb-gold transition"><i class="fas fa-search text-lg"></i></button>
+                    <button class="hidden md:block hover:text-pb-gold transition"><i class="far fa-user text-lg"></i></button>
+                    <button class="hidden md:block hover:text-pb-gold transition relative"><i class="far fa-heart text-lg"></i></button>
+                    <button id="cart-open-btn" class="hover:text-pb-gold transition relative">
+                        <i class="fas fa-shopping-bag text-lg"></i>
+                        <span id="cart-count" class="absolute -top-2 -right-2 bg-pb-gold text-pb-dark text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center transition-all duration-300">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Sidebar -->
+    <div id="mobile-sidebar" class="fixed inset-0 z-50 bg-pb-dark/95 backdrop-blur-md transform -translate-x-full transition-transform duration-300 md:hidden">
+        <div class="flex justify-between items-center p-6 border-b border-pb-gold/20">
+            <span class="font-serif text-xl text-pb-gold tracking-widest uppercase">Menu</span>
+            <button id="mobile-close-btn" class="text-white hover:text-pb-gold text-2xl">&times;</button>
+        </div>
+        <div class="p-6 flex flex-col space-y-6 text-lg uppercase tracking-wider">
+            <a href="index.html" class="hover:text-pb-gold">Men</a>
+            <a href="#" class="hover:text-pb-gold">Groom Wear</a>
+            <a href="#" class="hover:text-pb-gold">Festive Edit</a>
+            <a href="#" class="text-pb-gold">Book Appointment</a>
+        </div>
+    </div>
+
+    <!-- Breadcrumbs -->
+    <div class="container mx-auto px-4 py-6 text-xs tracking-widest text-gray-500 uppercase">
+        <a href="index.html" class="hover:text-pb-gold transition">Home</a> <span class="mx-2">/</span>
+        <a href="index.html" class="hover:text-pb-gold transition">Men</a> <span class="mx-2">/</span>
+        <a href="index.html?category=Indo-Western" class="hover:text-pb-gold transition">Indo-Western</a> <span class="mx-2">/</span>
+        <span class="text-pb-gold">Emerald Velvet Bandhgala</span>
+    </div>
+
+    <!-- Product Main Section -->
+    <section class="container mx-auto px-4 pb-24">
+        <div class="flex flex-col lg:flex-row gap-12 lg:gap-20">
+            
+            <!-- Left: Image Gallery -->
+            <div class="w-full lg:w-1/2 flex flex-col-reverse md:flex-row gap-4 h-auto lg:h-[800px]">
+                
+                <!-- Thumbnails -->
+                <div class="flex md:flex-col gap-4 w-full md:w-24 overflow-x-auto md:overflow-y-auto hide-scroll flex-shrink-0" id="thumbnail-container">
+                    <button class="thumbnail-btn w-20 md:w-full aspect-[3/4] border-2 border-pb-gold overflow-hidden transition-all flex-shrink-0">
+                        <img src="indowestern1.png" alt="Thumbnail 1" class="w-full h-full object-cover object-top pointer-events-none">
+                    </button>
+                    <button class="thumbnail-btn w-20 md:w-full aspect-[3/4] border-2 border-transparent hover:border-pb-gold/50 overflow-hidden transition-all flex-shrink-0">
+                        <img src="indowestern2.png" alt="Thumbnail 2" class="w-full h-full object-cover object-top pointer-events-none">
+                    </button>
+                    <button class="thumbnail-btn w-20 md:w-full aspect-[3/4] border-2 border-transparent hover:border-pb-gold/50 overflow-hidden transition-all flex-shrink-0">
+                        <img src="indowestern3.png" alt="Thumbnail 3" class="w-full h-full object-cover object-top pointer-events-none">
+                    </button>
+                </div>
+
+                <!-- Main Image -->
+                <div class="flex-1 bg-pb-dark-light relative overflow-hidden flex items-center justify-center border border-gray-800">
+                    <img id="main-product-image" src="indowestern1.png" alt="Emerald Velvet Bandhgala" class="w-full h-full object-cover object-top">
+                    <div class="absolute top-4 left-4 bg-pb-gold text-pb-dark text-xs uppercase font-bold px-3 py-1 tracking-widest z-10 shadow-lg">New Arrival</div>
+                </div>
+            </div>
+
+            <!-- Right: Product Information -->
+            <div class="w-full lg:w-1/2 flex flex-col">
+                <div class="mb-8 border-b border-gray-800 pb-8">
+                    <h1 id="product-title" class="font-serif text-4xl md:text-5xl text-white mb-4 leading-tight">Emerald Velvet Bandhgala</h1>
+                    
+                    <div class="flex items-center gap-4 mb-6">
+                        <p class="text-3xl text-pb-gold" data-price="115000">₹ 1,15,000</p>
+                        <div class="flex items-center text-pb-gold text-sm border-l border-gray-700 pl-4">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            <span class="text-gray-400 ml-2 font-light underline cursor-pointer hover:text-white transition">(8 Reviews)</span>
+                        </div>
+                    </div>
+
+                    <p class="text-gray-400 font-light leading-relaxed text-lg">
+                        Exuding royal sophistication, this Emerald Velvet Bandhgala is a masterpiece of tailoring. Crafted from plush, deep green premium velvet, it features subtle antique gold button accents and an impeccable structured silhouette that commands attention. Perfect for winter receptions and sangeet evenings.
+                    </p>
+                </div>
+
+                <!-- Product Options -->
+                <div class="mb-10">
+                    <!-- Color Selection -->
+                    <div class="mb-6">
+                        <span class="block text-sm text-white uppercase tracking-wider mb-3 font-semibold">Color: <span id="color-label" class="text-gray-400 font-light">Emerald Green</span></span>
+                        <div class="flex space-x-3" id="color-picker">
+                            <button class="color-btn w-10 h-10 rounded-full border-2 border-pb-gold bg-[#10422c] transition" data-color="Emerald Green" title="Emerald Green"></button>
+                            <button class="color-btn w-10 h-10 rounded-full border-2 border-transparent hover:border-gray-500 bg-[#1a1c29] transition" data-color="Midnight Blue" title="Midnight Blue"></button>
+                            <button class="color-btn w-10 h-10 rounded-full border-2 border-transparent hover:border-gray-500 bg-[#4e070c] transition" data-color="Royal Wine" title="Royal Wine"></button>
+                        </div>
+                    </div>
+
+                    <!-- Size Selection -->
+                    <div class="mb-6">
+                        <div class="flex justify-between items-end mb-3">
+                            <span class="text-sm text-white uppercase tracking-wider font-semibold">Size: <span id="size-label" class="text-gray-400 font-light">40</span></span>
+                            <button onclick="showToast('Size Guide opened (Example)')" class="text-xs text-pb-gold underline hover:text-white transition">Size Guide</button>
+                        </div>
+                        <div class="flex flex-wrap gap-3" id="size-picker">
+                            <button class="size-btn w-12 h-12 border border-gray-600 text-gray-300 hover:border-pb-gold hover:text-pb-gold transition" data-size="38">38</button>
+                            <button class="size-btn w-12 h-12 border border-pb-gold text-pb-dark bg-pb-gold transition font-bold shadow-[0_0_10px_rgba(197,160,89,0.3)]" data-size="40">40</button>
+                            <button class="size-btn w-12 h-12 border border-gray-600 text-gray-300 hover:border-pb-gold hover:text-pb-gold transition" data-size="42">42</button>
+                            <button class="size-btn w-12 h-12 border border-gray-600 text-gray-300 hover:border-pb-gold hover:text-pb-gold transition" data-size="44">44</button>
+                            <button class="size-btn w-12 h-12 border border-gray-600 text-gray-300 hover:border-pb-gold hover:text-pb-gold transition" data-size="46">46</button>
+                            <button class="size-btn px-6 h-12 border border-gray-600 text-gray-300 hover:border-pb-gold hover:text-pb-gold transition text-sm" data-size="Made to Measure">Made to Measure</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-col gap-4 mb-10">
+                    <div class="flex gap-4">
+                        <!-- Add to Bag -->
+                        <button onclick="addToBag()" class="flex-1 bg-transparent border border-pb-gold text-pb-gold py-4 uppercase tracking-widest text-sm font-bold hover:bg-pb-gold hover:text-pb-dark transition duration-300">
+                            Add to Bag
+                        </button>
+                        <!-- Wishlist -->
+                        <button onclick="toggleWishlist(this)" class="w-14 h-14 border border-gray-600 text-gray-300 flex items-center justify-center hover:border-pb-gold hover:text-pb-gold transition flex-shrink-0">
+                            <i class="far fa-heart text-xl transition-colors duration-300"></i>
+                        </button>
+                    </div>
+
+                    <!-- Buy Now Button (Razorpay Payment Link) -->
+                    <a href="https://rzp.io/rzp/VwMOdABi" target="_blank" class="w-full bg-pb-gold text-pb-dark py-4 uppercase tracking-widest text-sm font-bold hover:bg-white transition duration-300 shadow-[0_0_20px_rgba(197,160,89,0.3)] flex items-center justify-center gap-2">
+                        Buy It Now <i class="fas fa-bolt text-xs"></i>
+                    </a>
+
+                    <!-- WhatsApp Button -->
+                    <button onclick="shareOnWhatsApp()" class="w-full bg-transparent border border-wa-green text-wa-green py-4 uppercase tracking-widest text-sm font-bold hover:bg-wa-green hover:text-pb-dark transition duration-300 flex items-center justify-center gap-3 mt-2">
+                        <i class="fab fa-whatsapp text-xl"></i> Share / Inquire on WhatsApp
+                    </button>
+                    <p class="text-center text-xs text-gray-500 mt-1">Sends an image link & details to our stylist at +91 7000745724</p>
+                </div>
+
+                <!-- Accordions for Details -->
+                <div class="border-t border-gray-800 divide-y divide-gray-800">
+                    <!-- Accordion 1: Details -->
+                    <div class="accordion-item">
+                        <button class="accordion-header w-full flex justify-between items-center py-6 text-left text-white hover:text-pb-gold transition font-serif text-xl focus:outline-none">
+                            <span>Detailed Specifications</span>
+                            <i class="fas fa-plus text-sm transition-transform duration-300"></i>
+                        </button>
+                        <div class="accordion-content text-gray-400 font-light text-sm">
+                            <ul class="list-disc pl-5 space-y-2 pb-6">
+                                <li><strong>Fabric:</strong> Premium Italian Velvet (Top), Silk Blend (Bottom)</li>
+                                <li><strong>Detailing:</strong> Antique Gold crest buttons and subtle tonal stitch</li>
+                                <li><strong>Component:</strong> 2-Piece Set (Bandhgala Jacket, Matching Trousers)</li>
+                                <li><strong>Fit:</strong> Tailored Slim Fit</li>
+                                <li><strong>Care:</strong> Dry Clean Only. Avoid direct ironing on velvet.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Accordion 2: Shipping -->
+                    <div class="accordion-item">
+                        <button class="accordion-header w-full flex justify-between items-center py-6 text-left text-white hover:text-pb-gold transition font-serif text-xl focus:outline-none">
+                            <span>Shipping & Returns</span>
+                            <i class="fas fa-plus text-sm transition-transform duration-300"></i>
+                        </button>
+                        <div class="accordion-content text-gray-400 font-light text-sm pb-6">
+                            <p class="mb-3"><i class="fas fa-plane text-pb-gold mr-2 w-4"></i> <strong>Global Delivery:</strong> Ships globally within 4-6 weeks as each piece is made to order.</p>
+                            <p class="mb-3"><i class="fas fa-box text-pb-gold mr-2 w-4"></i> <strong>Packaging:</strong> Arrives in a signature Pungliya Brothers rigid box and velvet cover.</p>
+                            <p><i class="fas fa-undo text-pb-gold mr-2 w-4"></i> <strong>Returns:</strong> Eligible for return or size exchange within 7 days of delivery (excluding Custom/Made-to-Measure items).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- You May Also Like Section -->
+    <section class="py-20 bg-pb-dark-light border-t border-pb-gold/10">
+        <div class="container mx-auto px-4">
+            <h2 class="font-serif text-3xl text-white text-center mb-12">Complete The Look</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+                <!-- Suggestion 1 -->
+                <div class="product-card group relative">
+                    <a href="#" class="block">
+                        <div class="relative overflow-hidden aspect-[3/4] bg-gray-900 border border-gray-800">
+                            <img src="kp1.png" alt="Kurta" class="w-full h-full object-cover object-top transition duration-500 group-hover:scale-105">
+                        </div>
+                        <div class="pt-4 text-center">
+                            <h3 class="font-serif text-lg text-white group-hover:text-pb-gold transition">Solid Black Inner Kurta</h3>
+                            <p class="text-pb-gold mt-1">₹ 15,000</p>
+                        </div>
+                    </a>
+                </div>
+                <!-- Suggestion 2 -->
+                <div class="product-card group relative">
+                    <a href="#" class="block">
+                        <div class="relative overflow-hidden aspect-[3/4] bg-gray-900 border border-gray-800">
+                            <img src="s2.png" alt="Shoes" class="w-full h-full object-cover object-top transition duration-500 group-hover:scale-105">
+                        </div>
+                        <div class="pt-4 text-center">
+                            <h3 class="font-serif text-lg text-white group-hover:text-pb-gold transition">Black Velvet Loafers</h3>
+                            <p class="text-pb-gold mt-1">₹ 12,500</p>
+                        </div>
+                    </a>
+                </div>
+                <!-- Suggestion 3 -->
+                <div class="product-card group relative">
+                    <a href="#" class="block">
+                        <div class="relative overflow-hidden aspect-[3/4] bg-gray-900 border border-gray-800">
+                            <img src="s5.png" alt="Pocket Square" class="w-full h-full object-cover object-top transition duration-500 group-hover:scale-105">
+                        </div>
+                        <div class="pt-4 text-center">
+                            <h3 class="font-serif text-lg text-white group-hover:text-pb-gold transition">Gold Silk Pocket Square</h3>
+                            <p class="text-pb-gold mt-1">₹ 3,500</p>
+                        </div>
+                    </a>
+                </div>
+                <!-- Suggestion 4 -->
+                <div class="product-card group relative">
+                    <a href="#" class="block">
+                        <div class="relative overflow-hidden aspect-[3/4] bg-gray-900 border border-gray-800">
+                            <img src="SH2.png" alt="Brooch" class="w-full h-full object-cover object-top transition duration-500 group-hover:scale-105">
+                        </div>
+                        <div class="pt-4 text-center">
+                            <h3 class="font-serif text-lg text-white group-hover:text-pb-gold transition">Antique Gold Crest Brooch</h3>
+                            <p class="text-pb-gold mt-1">₹ 8,500</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#050505] pt-20 pb-10 border-t border-pb-gold/30">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
+                <div>
+                    <h2 class="font-serif text-2xl text-pb-gold tracking-widest uppercase font-bold mb-6">Pungliya <br><span class="font-light text-white text-xs tracking-[0.4em]">Brothers</span></h2>
+                    <p class="text-gray-400 font-light text-sm leading-relaxed mb-6">Defining luxury Indian ethnic wear since 1990. Celebrating the modern bride and groom with timeless craftsmanship.</p>
+                </div>
+                <div>
+                    <h4 class="text-white uppercase tracking-widest text-sm font-semibold mb-6">Men's Shop</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm font-light">
+                        <li><a href="#" class="hover:text-pb-gold transition">Sherwanis</a></li>
+                        <li><a href="#" class="hover:text-pb-gold transition">Indo-Western</a></li>
+                        <li><a href="#" class="hover:text-pb-gold transition">Kurta Sets</a></li>
+                        <li><a href="#" class="hover:text-pb-gold transition">Men's Accessories</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white uppercase tracking-widest text-sm font-semibold mb-6">Customer Care</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm font-light">
+                        <li><a href="#" class="hover:text-pb-gold transition">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-pb-gold transition">Shipping & Returns</a></li>
+                        <li><a href="#" class="hover:text-pb-gold transition">Size Guide</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white uppercase tracking-widest text-sm font-semibold mb-6">Flagship Store</h4>
+                    <address class="text-gray-400 text-sm font-light not-italic leading-relaxed mb-4">
+                        123 Luxury Boulevard,<br> Jubilee Hills, Hyderabad
+                    </address>
+                    <p class="text-gray-400 text-sm font-light"><i class="fas fa-phone mr-2 text-pb-gold"></i> +91 98765 43210</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center text-xs text-gray-500">
+                <p>&copy; 2026 Pungliya Brothers. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Drawer UI -->
+    <div id="cart-overlay" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 opacity-0 invisible transition-all duration-300"></div>
+    <div id="cart-drawer" class="fixed top-0 right-0 h-full w-full md:w-[450px] bg-pb-dark-light shadow-2xl z-50 transform translate-x-full transition-transform duration-500 ease-in-out flex flex-col border-l border-pb-gold/20">
+        <!-- Cart Header -->
+        <div class="p-6 flex justify-between items-center border-b border-gray-800">
+            <h2 class="font-serif text-2xl text-pb-gold">Shopping Bag (<span id="cart-drawer-count">0</span>)</h2>
+            <button id="cart-close-btn" class="text-gray-400 hover:text-white transition text-xl"><i class="fas fa-times"></i></button>
+        </div>
+        
+        <!-- Cart Items -->
+        <div id="cart-items-container" class="flex-1 overflow-y-auto p-6 space-y-6 hide-scroll">
+            <!-- Items injected by JS -->
+        </div>
+
+        <!-- Cart Footer -->
+        <div class="p-6 border-t border-gray-800 bg-pb-dark">
+            <div class="flex justify-between text-lg mb-4">
+                <span class="font-serif text-white">Subtotal</span>
+                <span class="text-pb-gold font-medium" id="cart-subtotal">₹ 0</span>
+            </div>
+            <p class="text-xs text-gray-400 mb-6">Taxes and shipping calculated at checkout.</p>
+            <a href="https://rzp.io/rzp/VwMOdABi" target="_blank" class="block text-center w-full bg-pb-gold text-pb-dark py-4 uppercase tracking-widest text-sm font-bold hover:bg-white transition duration-300 shadow-[0_0_15px_rgba(197,160,89,0.3)]">Proceed to Checkout</a>
+        </div>
+    </div>
+
+    <script>
+        let cartItems = [];
+
+        // Custom Toast Notification System
+        function showToast(message, icon = "fas fa-check-circle") {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            
+            toast.className = `bg-pb-dark-light border border-pb-gold/30 text-white px-6 py-4 shadow-2xl flex items-center gap-3 toast-enter rounded-sm`;
+            toast.innerHTML = `<i class="${icon} text-pb-gold text-lg"></i> <span class="text-sm tracking-wide">${message}</span>`;
+            
+            container.appendChild(toast);
+
+            // Remove toast after 3 seconds
+            setTimeout(() => {
+                toast.classList.replace('toast-enter', 'toast-exit');
+                setTimeout(() => toast.remove(), 400); // wait for exit animation
+            }, 3000);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- Image Gallery Logic ---
+            const mainImage = document.getElementById('main-product-image');
+            const thumbnails = document.querySelectorAll('.thumbnail-btn');
+
+            thumbnails.forEach(thumb => {
+                thumb.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    // Update borders
+                    thumbnails.forEach(t => {
+                        t.classList.remove('border-pb-gold');
+                        t.classList.add('border-transparent');
+                    });
+                    this.classList.remove('border-transparent');
+                    this.classList.add('border-pb-gold');
+
+                    // Swap Image
+                    const newSrc = this.querySelector('img').src;
+                    mainImage.style.opacity = '0';
+                    setTimeout(() => {
+                        mainImage.src = newSrc;
+                        mainImage.style.opacity = '1';
+                    }, 150);
+                });
+            });
+
+            // --- Size Picker Logic ---
+            const sizeBtns = document.querySelectorAll('.size-btn');
+            const sizeLabel = document.getElementById('size-label');
+            sizeBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Reset all
+                    sizeBtns.forEach(b => {
+                        b.classList.remove('border-pb-gold', 'text-pb-dark', 'bg-pb-gold', 'font-bold', 'shadow-[0_0_10px_rgba(197,160,89,0.3)]');
+                        b.classList.add('border-gray-600', 'text-gray-300');
+                    });
+                    // Set active
+                    this.classList.remove('border-gray-600', 'text-gray-300');
+                    this.classList.add('border-pb-gold', 'text-pb-dark', 'bg-pb-gold', 'font-bold', 'shadow-[0_0_10px_rgba(197,160,89,0.3)]');
+                    // Update Label
+                    sizeLabel.innerText = this.getAttribute('data-size');
+                });
+            });
+
+            // --- Color Picker Logic ---
+            const colorBtns = document.querySelectorAll('.color-btn');
+            const colorLabel = document.getElementById('color-label');
+            colorBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    colorBtns.forEach(b => {
+                        b.classList.remove('border-pb-gold');
+                        b.classList.add('border-transparent');
+                    });
+                    this.classList.remove('border-transparent');
+                    this.classList.add('border-pb-gold');
+                    colorLabel.innerText = this.getAttribute('data-color');
+                });
+            });
+
+            // --- Accordion Logic ---
+            const accordions = document.querySelectorAll('.accordion-header');
+            accordions.forEach(acc => {
+                acc.addEventListener('click', function() {
+                    const content = this.nextElementSibling;
+                    const icon = this.querySelector('i');
+                    
+                    if (content.classList.contains('open')) {
+                        content.classList.remove('open');
+                        icon.classList.replace('fa-minus', 'fa-plus');
+                        icon.style.transform = 'rotate(0deg)';
+                    } else {
+                        content.classList.add('open');
+                        icon.classList.replace('fa-plus', 'fa-minus');
+                        icon.style.transform = 'rotate(180deg)';
+                    }
+                });
+            });
+
+            // Open the first accordion by default
+            if(accordions.length > 0) accordions[0].click();
+
+            // Cart Event Listeners
+            document.getElementById('cart-open-btn').addEventListener('click', () => toggleCart(true));
+            document.getElementById('cart-close-btn').addEventListener('click', () => toggleCart(false));
+            document.getElementById('cart-overlay').addEventListener('click', () => toggleCart(false));
+            
+            renderCart(); // Initial empty render
+        });
+
+        // --- Cart Drawer Logic ---
+        function toggleCart(show) {
+            const cartDrawer = document.getElementById('cart-drawer');
+            const cartOverlay = document.getElementById('cart-overlay');
+            if(show) {
+                cartDrawer.classList.remove('translate-x-full');
+                cartOverlay.classList.replace('opacity-0', 'opacity-100');
+                cartOverlay.classList.replace('invisible', 'visible');
+                document.body.style.overflow = 'hidden';
+            } else {
+                cartDrawer.classList.add('translate-x-full');
+                cartOverlay.classList.replace('opacity-100', 'opacity-0');
+                cartOverlay.classList.replace('visible', 'invisible');
+                document.body.style.overflow = '';
+            }
+        }
+
+        // --- Add to Bag Logic ---
+        function addToBag() {
+            // Gather selected product info
+            const title = document.getElementById('product-title').innerText;
+            const priceText = document.querySelector('[data-price]').getAttribute('data-price');
+            const price = parseInt(priceText);
+            const image = document.getElementById('main-product-image').src;
+            const size = document.getElementById('size-label').innerText;
+            const color = document.getElementById('color-label').innerText;
+
+            // Check if item with same size and color is already in cart
+            const existingItemIndex = cartItems.findIndex(item => item.size === size && item.color === color);
+
+            if (existingItemIndex > -1) {
+                cartItems[existingItemIndex].quantity += 1;
+            } else {
+                cartItems.push({ title, price, image, size, color, quantity: 1 });
+            }
+
+            renderCart();
+            showToast('Added to your Shopping Bag', 'fas fa-shopping-bag');
+            toggleCart(true); // Automatically slide out the drawer
+        }
+
+        // --- Render Cart Logic ---
+        function renderCart() {
+            const container = document.getElementById('cart-items-container');
+            const badge = document.getElementById('cart-count');
+            const drawerCount = document.getElementById('cart-drawer-count');
+            const subtotalEl = document.getElementById('cart-subtotal');
+
+            let totalItems = 0;
+            let subtotal = 0;
+
+            if (cartItems.length === 0) {
+                container.innerHTML = `
+                    <div class="flex-1 flex flex-col items-center justify-center h-full mt-20">
+                        <i class="fas fa-shopping-bag text-4xl text-gray-700 mb-4"></i>
+                        <p class="text-gray-400">Your bag is currently empty.</p>
+                        <a href="#" onclick="toggleCart(false)" class="inline-block mt-4 text-pb-gold border-b border-pb-gold text-sm tracking-widest uppercase pb-1">Continue Shopping</a>
+                    </div>`;
+            } else {
+                container.innerHTML = '';
+                cartItems.forEach((item, index) => {
+                    totalItems += item.quantity;
+                    subtotal += item.price * item.quantity;
+                    
+                    const itemTotalFormat = new Intl.NumberFormat('en-IN').format(item.price * item.quantity);
+
+                    container.innerHTML += `
+                        <div class="flex gap-4 group">
+                            <div class="w-24 h-32 bg-gray-900 flex-shrink-0">
+                                <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover object-top">
+                            </div>
+                            <div class="flex-1 flex flex-col justify-between py-1">
+                                <div>
+                                    <div class="flex justify-between">
+                                        <h4 class="font-serif text-white group-hover:text-pb-gold transition text-sm leading-tight">${item.title}</h4>
+                                        <button onclick="removeFromCart(${index})" class="text-gray-500 hover:text-red-500 transition ml-2"><i class="far fa-trash-alt"></i></button>
+                                    </div>
+                                    <p class="text-xs text-gray-400 mt-2">Size: ${item.size} | Color: ${item.color}</p>
+                                </div>
+                                <div class="flex justify-between items-end mt-4">
+                                    <div class="flex items-center border border-gray-700 rounded-sm">
+                                        <button onclick="updateQuantity(${index}, -1)" class="px-3 py-1 text-gray-400 hover:text-white transition">-</button>
+                                        <span class="px-2 text-sm text-white">${item.quantity}</span>
+                                        <button onclick="updateQuantity(${index}, 1)" class="px-3 py-1 text-gray-400 hover:text-white transition">+</button>
+                                    </div>
+                                    <p class="text-pb-gold font-medium text-sm">₹ ${itemTotalFormat}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+
+            // Update Badges & Subtotal
+            badge.innerText = totalItems;
+            drawerCount.innerText = totalItems;
+            
+            // Pop animation for badge
+            badge.style.transform = 'scale(1.5)';
+            setTimeout(() => badge.style.transform = 'scale(1)', 200);
+
+            subtotalEl.innerText = '₹ ' + new Intl.NumberFormat('en-IN').format(subtotal);
+        }
+
+        // --- Cart Item Actions ---
+        function updateQuantity(index, change) {
+            cartItems[index].quantity += change;
+            if (cartItems[index].quantity <= 0) {
+                cartItems.splice(index, 1);
+            }
+            renderCart();
+        }
+
+        function removeFromCart(index) {
+            cartItems.splice(index, 1);
+            renderCart();
+        }
+
+        // --- Wishlist Logic ---
+        function toggleWishlist(btn) {
+            const icon = btn.querySelector('i');
+            if(icon.classList.contains('far')) {
+                // Add to wishlist
+                icon.classList.replace('far', 'fas');
+                icon.classList.add('text-pb-gold');
+                showToast('Saved to your Wishlist', 'fas fa-heart');
+            } else {
+                // Remove from wishlist
+                icon.classList.replace('fas', 'far');
+                icon.classList.remove('text-pb-gold');
+                showToast('Removed from your Wishlist', 'far fa-heart');
+            }
+        }
+
+        // --- WhatsApp Logic ---
+        function shareOnWhatsApp() {
+            const phoneNumber = "917000745724"; 
+            const productTitle = document.getElementById('product-title').innerText;
+            const currentUrl = window.location.href; 
+            
+            const message = `Hello Pungliya Brothers! I am interested in this product:%0A%0A*${productTitle}*%0A%0AHere is the link/reference to the item:%0A${currentUrl}%0A%0ACan you share more details?`;
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+            
+            window.open(whatsappUrl, '_blank');
+        }
+    </script>
+</body>
+</html>

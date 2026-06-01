@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pungliya Brothers | Luxury Ethnic & Bridal Fashion</title>
+    
+    <!-- Fonts: Playfair Display for luxury headings, Jost for clean modern body text -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'pb-dark': '#0a0a0a',        // Deepest charcoal
+                        'pb-dark-light': '#1a1a1a',  // Lighter charcoal for cards
+                        'pb-gold': '#c5a059',        // Sophisticated metallic gold
+                        'pb-gold-light': '#d4b475',
+                        'pb-light': '#f9f8f6',       // Off-white/beige background
+                        'pb-gray': '#e5e5e5',        // Soft borders
+                        'pb-text': '#333333'
+                    },
+                    fontFamily: {
+                        'serif': ['"Playfair Display"', 'serif'],
+                        'sans': ['"Jost"', 'sans-serif'],
+                    },
+                    spacing: {
+                        '128': '32rem',
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'slow-zoom': 'slowZoom 10s linear infinite alternate',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        slowZoom: {
+                            '0%': { transform: 'scale(1)' },
+                            '100%': { transform: 'scale(1.05)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c5a059;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #d4b475;
+        }
+
+        /* Hide scrollbar for horizontal scrolling containers but keep functionality */
+        .hide-scroll::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scroll {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+
+        /* Glassmorphism utilities */
+        .glass {
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(197, 160, 89, 0.1);
+        }
+
+        /* Image Hover Reveal */
+        .product-card .secondary-img {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .product-card:hover .secondary-img {
+            opacity: 1;
+        }
+        .product-card:hover .primary-img {
+            opacity: 0;
+        }
+
+        /* Mega Menu Hover */
+        .nav-item:hover .mega-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .mega-menu {
+            transition: all 0.3s ease-in-out;
+            transform: translateY(10px);
+        }
+
+        /* Slider Transitions */
+        .slide {
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+        }
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+            z-index: 10;
+        }
+        .slide.inactive {
+            opacity: 0;
+            transform: scale(1.05);
+            z-index: 0;
+        }
+
+        /* Intersection Observer Animation Class */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="font-sans bg-pb-dark text-pb-light antialiased overflow-x-hidden">
+
+    <div class="bg-pb-gold text-pb-dark text-xs uppercase tracking-[0.2em] font-semibold text-center py-2 relative z-50">
+        <span>Complimentary Global Shipping on orders over $500 | Discover the Festive Edit</span>
+    </div>
+
+    <header class="fixed w-full top-[32px] z-40 transition-all duration-300" id="main-header">
+        <div class="glass w-full">
+            <div class="container mx-auto px-4 md:px-8">
+                <div class="flex items-center justify-between h-20">
+                    
+                    <!-- Mobile Menu Button -->
+                    <div class="md:hidden flex items-center">
+                        <button id="mobile-menu-btn" class="text-pb-light hover:text-pb-gold transition p-2">
+                            <i class="fas fa-bars text-xl"></i>
+                        </button>
+                    </div>
+
+                    <!-- Logo -->
+                    <div class="flex-shrink-0 flex items-center justify-center flex-1 md:flex-none">
+                        <a href="#" class="font-serif text-2xl md:text-3xl tracking-widest text-pb-gold uppercase font-bold text-center">
+                            Pungliya <span class="font-light text-pb-light block text-[10px] md:text-xs tracking-[0.4em] mt-1">Brothers</span>
+                        </a>
+                    </div>
+
+                    <!-- Desktop Navigation -->
+                    <nav class="hidden md:flex space-x-8 items-center h-full">
+                        <!-- Men -->
+                        <div class="nav-item relative h-full flex items-center">
+                            <a href="man.html" class="text-sm uppercase tracking-wider hover:text-pb-gold transition font-medium">Men</a>
+                            <!-- Mega Menu -->
+                            <div class="mega-menu absolute top-full left-0 w-max bg-pb-dark-light border border-pb-gold/20 p-8 shadow-2xl opacity-0 invisible flex gap-12 z-50">
+                                <div>
+                                    <h4 class="font-serif text-pb-gold mb-4 text-lg">Categories</h4>
+                                    <ul class="space-y-3 text-sm text-gray-300">
+                                        <li><a href="man.html?category=Sherwanis" class="hover:text-pb-gold transition">Sherwanis</a></li>
+                                        <li><a href="man.html?category=Indo-Western" class="hover:text-pb-gold transition">Indo-Western</a></li>
+                                        <li><a href="man.html?category=Kurta Sets" class="hover:text-pb-gold transition">Kurta Sets</a></li>
+                                        <li><a href="man.html?category=Jodhpuri Suits" class="hover:text-pb-gold transition">Jodhpuri Suits</a></li>
+                                        <li><a href="man.html?category=Nehru Jackets" class="hover:text-pb-gold transition">Nehru Jackets</a></li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="font-serif text-pb-gold mb-4 text-lg">Collections</h4>
+                                    <ul class="space-y-3 text-sm text-gray-300">
+                                        <li><a href="#" class="hover:text-pb-gold transition">Royal Wedding</a></li>
+                                        <li><a href="#" class="hover:text-pb-gold transition">Festive Edit</a></li>
+                                        <li><a href="#" class="hover:text-pb-gold transition">Minimalist</a></li>
+                                    </ul>
+                                </div>
+                                <div class="w-64">
+                                    <img src="https://www.shutterstock.com/video/clip-3501053043-indian-hindu-groom-walks-towards-his-bride?trackingId=38a57bb0-477f-469f-9889-b8f8bee1fcb1&listId=searchResults" alt="Menswear" class="w-full h-48 object-cover rounded-sm mb-3">
+                                    <a href="man.html" class="text-sm uppercase tracking-widest text-pb-gold border-b border-pb-gold pb-1 hover:text-white transition">Shop The Look</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- New Menu Items -->
+                        <div class="nav-item relative h-full flex items-center"><a href="#" class="text-sm uppercase tracking-wider hover:text-pb-gold transition font-medium">Groom Wear</a></div>
+                        <div class="nav-item relative h-full flex items-center"><a href="#" class="text-sm uppercase tracking-wider hover:text-pb-gold transition font-medium">Festive Edit</a></div>
+                        <div class="nav-item relative h-full flex items-center"><a href="#" class="text-sm uppercase tracking-wider text-pb-gold transition font-medium">Book Appointment</a></div>
+                    </nav>
+
+                    <!-- Icons (Search, Account, Wishlist, Cart) -->
+                    <div class="flex items-center space-x-5 md:space-x-6">
+                        <button class="hover:text-pb-gold transition"><i class="fas fa-search text-lg"></i></button>
+                        <button class="hidden md:block hover:text-pb-gold transition"><i class="far fa-user text-lg"></i></button>
+                        <button class="hidden md:block hover:text-pb-gold transition relative">
+                            <i class="far fa-heart text-lg"></i>
+                        </button>
+                        <button id="cart-open-btn" class="hover:text-pb-gold transition relative">
+                            <i class="fas fa-shopping-bag text-lg"></i>
+                            <span class="absolute -top-2 -right-2 bg-pb-gold text-pb-dark text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">2</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="mobile-sidebar" class="fixed inset-0 z-50 bg-pb-dark/95 backdrop-blur-md transform -translate-x-full transition-transform duration-300 md:hidden">
+        <div class="flex justify-between items-center p-6 border-b border-pb-gold/20">
+            <span class="font-serif text-xl text-pb-gold tracking-widest uppercase">Menu</span>
+            <button id="mobile-close-btn" class="text-white hover:text-pb-gold text-2xl">&times;</button>
+        </div>
+        <div class="p-6 flex flex-col space-y-6 text-lg uppercase tracking-wider">
+            <a href="man.html" class="hover:text-pb-gold">Men</a>
+            <a href="#" class="hover:text-pb-gold">Groom Wear</a>
+            <a href="#" class="hover:text-pb-gold">Festive Edit</a>
+            <a href="#" class="text-pb-gold">Book Appointment</a>
+            <div class="border-t border-pb-gold/20 pt-6 mt-4 flex space-x-6">
+                <a href="#" class="hover:text-pb-gold"><i class="far fa-user"></i> Account</a>
+                <a href="#" class="hover:text-pb-gold"><i class="far fa-heart"></i> Wishlist</a>
+            </div>
+        </div>
+    </div>
+
+    <section class="relative h-screen w-full overflow-hidden bg-pb-dark">
+        <div id="hero-slider" class="relative w-full h-full">
+            
+            <!-- Slide 1: Groom Wear (Replacing Bridal) -->
+            <div class="slide absolute inset-0 w-full h-full active">
+                <div class="absolute inset-0 bg-black/40 z-10"></div> <!-- Overlay -->
+                <!-- Replacing with a groom/sherwani image -->
+                <img src="SH1.png" alt="Groom Couture" class="w-full h-full object-cover object-top animate-slow-zoom">
+                <div class="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-4">
+                    <p class="text-pb-gold tracking-[0.3em] uppercase text-sm mb-4 animate-fade-in-up" style="animation-delay: 0.2s;">The Royal Heritage</p>
+                    <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl text-white mb-6 animate-fade-in-up" style="animation-delay: 0.4s;">Groom Couture '26</h1>
+                    <a href="#" class="mt-4 px-8 py-3 bg-transparent border border-pb-gold text-pb-gold uppercase tracking-widest text-sm hover:bg-pb-gold hover:text-pb-dark transition duration-300 animate-fade-in-up" style="animation-delay: 0.6s;">Explore Sherwanis</a>
+                </div>
+            </div>
+
+            <!-- Slide 2: Festive Edit -->
+            <div class="slide absolute inset-0 w-full h-full inactive">
+                <div class="absolute inset-0 bg-black/50 z-10"></div>
+                <img src="kp1.png" alt="Festive Edit" class="w-full h-full object-cover object-top">
+                <div class="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-4">
+                    <p class="text-pb-gold tracking-[0.3em] uppercase text-sm mb-4">Modern Elegance</p>
+                    <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl text-white mb-6">The Festive Edit</h1>
+                    <a href="#" class="mt-4 px-8 py-3 bg-pb-gold text-pb-dark uppercase tracking-widest text-sm hover:bg-white transition duration-300">Shop Kurta Sets</a>
+                </div>
+            </div>
+
+            <!-- Slide Controls -->
+            <button id="prev-slide" class="absolute left-4 top-1/2 -translate-y-1/2 z-30 w-12 h-12 border border-white/30 rounded-full flex items-center justify-center text-white hover:bg-white hover:text-pb-dark transition backdrop-blur-sm">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button id="next-slide" class="absolute right-4 top-1/2 -translate-y-1/2 z-30 w-12 h-12 border border-white/30 rounded-full flex items-center justify-center text-white hover:bg-white hover:text-pb-dark transition backdrop-blur-sm">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </section>
+
+    <section class="py-24 bg-pb-dark relative">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-serif text-3xl md:text-5xl text-white mb-4">The Universe of Pungliya</h2>
+                <div class="w-16 h-px bg-pb-gold mx-auto"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Category 1: Groom Wear -->
+                <div class="group relative overflow-hidden h-[500px] cursor-pointer reveal" style="transition-delay: 0.1s;">
+                    <img src="SH2.png" alt="Groom Wear" class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                    <div class="absolute bottom-8 left-8">
+                        <h3 class="font-serif text-3xl text-white mb-2">Groom Wear</h3>
+                        <p class="text-pb-gold text-sm tracking-widest uppercase mb-4 opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition duration-500">Royal Heritage</p>
+                    </div>
+                </div>
+
+                <!-- Category 2: Festive Wear -->
+                <div class="group relative overflow-hidden h-[500px] cursor-pointer reveal" style="transition-delay: 0.2s;">
+                    <img src="kp2.png" alt="Festive Wear" class="w-full h-full object-cover transition duration-700 group-hover:scale-105 object-top">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                    <div class="absolute bottom-8 left-8">
+                        <h3 class="font-serif text-3xl text-white mb-2">Festive Edit</h3>
+                        <p class="text-pb-gold text-sm tracking-widest uppercase mb-4 opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition duration-500">Celebratory Styles</p>
+                    </div>
+                </div>
+
+                <!-- Category 3: Indo-Western -->
+                <div class="group relative overflow-hidden h-[500px] cursor-pointer reveal" style="transition-delay: 0.3s;">
+                    <img src="indowestern1.png" alt="Indo Western" class="w-full h-full object-cover transition duration-700 group-hover:scale-105 object-top">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                    <div class="absolute bottom-8 left-8">
+                        <h3 class="font-serif text-3xl text-white mb-2">Indo-Western</h3>
+                        <p class="text-pb-gold text-sm tracking-widest uppercase mb-4 opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition duration-500">Modern Silhouettes</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-pb-dark-light">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 reveal">
+                <div>
+                    <h2 class="font-serif text-3xl md:text-4xl text-white mb-2">Trending Now</h2>
+                    <p class="text-gray-400 font-light">Curated pieces loved by our clientele.</p>
+                </div>
+                <!-- Tabs for dynamic filtering -->
+                <div class="flex space-x-6 mt-6 md:mt-0 border-b border-gray-700 pb-2" id="trending-filters">
+                    <button class="filter-btn text-pb-gold uppercase tracking-widest text-sm font-semibold" data-filter="all">All</button>
+                    <button class="filter-btn text-gray-500 hover:text-white uppercase tracking-widest text-sm transition" data-filter="sherwani">Sherwanis</button>
+                    <button class="filter-btn text-gray-500 hover:text-white uppercase tracking-widest text-sm transition" data-filter="kurta">Kurta Sets</button>
+                    <button class="filter-btn text-gray-500 hover:text-white uppercase tracking-widest text-sm transition" data-filter="indo-western">Indo-Western</button>
+                </div>
+            </div>
+
+            <!-- Product Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6" id="product-grid">
+                
+                <!-- Product Card 1: Sherwani -->
+                <div class="product-card group relative reveal" data-category="sherwani" style="transition-delay: 0.1s;">
+                    <div class="relative overflow-hidden aspect-[3/4] bg-gray-900">
+                        <a href="product-royal-ivory-sherwani.html" class="absolute inset-0 z-0 block w-full h-full">
+                            <img src="SH1.png" alt="Sherwani" class="primary-img absolute inset-0 w-full h-full object-cover transition-opacity duration-500">
+                            <img src="SH2.png" alt="Sherwani Detail" class="secondary-img absolute inset-0 w-full h-full object-cover">
+                        </a>
+                        <div class="absolute top-4 left-4 bg-pb-gold text-pb-dark text-[10px] uppercase font-bold px-2 py-1 tracking-wider z-10">Bestseller</div>
+                        <div class="absolute bottom-4 left-0 w-full flex justify-center space-x-4 opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 z-20">
+                            <button class="w-10 h-10 bg-white/90 backdrop-blur text-pb-dark rounded-full flex items-center justify-center hover:bg-pb-gold hover:text-white transition shadow-lg tooltip-trigger" data-tooltip="Quick View" onclick="openQuickView(event)">
+                                <i class="far fa-eye"></i>
+                            </button>
+                            <button class="w-10 h-10 bg-white/90 backdrop-blur text-pb-dark rounded-full flex items-center justify-center hover:bg-pb-gold hover:text-white transition shadow-lg tooltip-trigger" data-tooltip="Add to Wishlist" onclick="event.preventDefault(); event.stopPropagation(); alert('Added to wishlist!');">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="pt-4 text-center">
+                        <a href="product-royal-ivory-sherwani.html" class="inline-block">
+                            <h3 class="font-serif text-lg text-white hover:text-pb-gold transition cursor-pointer">Royal Ivory Silk Sherwani</h3>
+                        </a>
+                        <p class="text-pb-gold mt-1">₹ 18,500</p>
+                    </div>
+                </div>
+
+                <!-- Product Card 2: Indo Western -->
+                <div class="product-card group relative reveal" data-category="indo-western" style="transition-delay: 0.2s;">
+                    <div class="relative overflow-hidden aspect-[3/4] bg-gray-900">
+                        <a href="product-emerald-bandhgala.html" class="absolute inset-0 z-0 block w-full h-full">
+                            <img src="indowestern1.png" alt="Indo Western" class="primary-img absolute inset-0 w-full h-full object-cover transition-opacity duration-500 object-top">
+                            <img src="indowestern2.png" alt="Indo Western Detail" class="secondary-img absolute inset-0 w-full h-full object-cover">
+                        </a>
+                        <div class="absolute bottom-4 left-0 w-full flex justify-center space-x-4 opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 z-20">
+                            <button class="w-10 h-10 bg-white/90 backdrop-blur text-pb-dark rounded-full flex items-center justify-center hover:bg-pb-gold hover:text-white transition shadow-lg tooltip-trigger" data-tooltip="Quick View" onclick="openQuickView(event)">
+                                <i class="far fa-eye"></i>
+                            </button>
+                            <button class="w-10 h-10 bg-white/90 backdrop-blur text-pb-dark rounded-full flex items-center justify-center hover:bg-pb-gold hover:text-white transition shadow-lg tooltip-trigger" data-tooltip="Add to Wishlist" onclick="event.preventDefault(); event.stopPropagation(); alert('Added to wishlist!');">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="pt-4 text-center">
+                        <a href="product-emerald-bandhgala.html" class="inline-block">
+                            <h3 class="font-serif text-lg text-white hover:text-pb-gold transition cursor-pointer">Emerald Velvet Bandhgala</h3>
+                        </a>
+                        <p class="text-pb-gold mt-1">₹ 1,15,000</p>
+                    </div>
+                </div>
+
+                <!-- Product Card 3: Kurta Set -->
+                <div class="product-card group relative reveal" data-category="kurta" style="transition-delay: 0.3s;">
+                    <div class="relative overflow-hidden aspect-[3/4] bg-gray-900">
+                        <a href="product-dusty-rose-kurta.html" class="absolute inset-0 z-0 block w-full h-full">
+                            <img src="kp1.png" alt="Kurta Set" class="primary-img absolute inset-0 w-full h-full object-cover transition-opacity duration-500">
+                            <img src="kp2.png" alt="Kurta Detail" class="secondary-img absolute inset-0 w-full h-full object-cover">
+                        </a>
+                        <div class="absolute bottom-4 left-0 w-full flex justify-center space-x-4 opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 z-20">
+                            <button class="w-10 h-10 bg-white/90 backdrop-blur text-pb-dark rounded-full flex items-center justify-center hover:bg-pb-gold hover:text-white transition shadow-lg tooltip-trigger" data-tooltip="Quick View" onclick="openQuickView(event)">
+                                <i class="far fa-eye"></i>
+                            </button>
+                            <button class="w-10 h-10 bg-white/90 backdrop-blur text-pb-dark rounded-full flex items-center justify-center hover:bg-pb-gold hover:text-white transition shadow-lg tooltip-trigger" data-tooltip="Add to Wishlist" onclick="event.preventDefault(); event.stopPropagation(); alert('Added to wishlist!');">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="pt-4 text-center">
+                        <a href="product-dusty-rose-kurta.html" class="inline-block">
+                            <h3 class="font-serif text-lg text-white hover:text-pb-gold transition cursor-pointer">Dusty Rose Chikankari Kurta</h3>
+                        </a>
+                        <p class="text-pb-gold mt-1">₹ 28,000</p>
+                    </div>
+                </div>
+
+                <!-- Product Card 4: Jodhpuri -->
+                <div class="product-card group relative reveal" data-category="indo-western" style="transition-delay: 0.4s;">
+                    <div class="relative overflow-hidden aspect-[3/4] bg-gray-900">
+                        <a href="product-charcoal-jodhpuri.html" class="absolute inset-0 z-0 block w-full h-full">
+                            <img src="s1.png" alt="Jodhpuri Suit" class="primary-img absolute inset-0 w-full h-full object-cover transition-opacity duration-500 object-top">
+                            <img src="s2.png" alt="Jodhpuri Suit Detail" class="secondary-img absolute inset-0 w-full h-full object-cover">
+                        </a>
+                        <div class="absolute top-4 left-4 bg-white text-pb-dark text-[10px] uppercase font-bold px-2 py-1 tracking-wider z-10">New Arrival</div>
+                        <div class="absolute bottom-4 left-0 w-full flex justify-center space-x-4 opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 z-20">
+                            <button class="w-10 h-10 bg-white/90 backdrop-blur text-pb-dark rounded-full flex items-center justify-center hover:bg-pb-gold hover:text-white transition shadow-lg tooltip-trigger" data-tooltip="Quick View" onclick="openQuickView(event)">
+                                <i class="far fa-eye"></i>
+                            </button>
+                            <button class="w-10 h-10 bg-white/90 backdrop-blur text-pb-dark rounded-full flex items-center justify-center hover:bg-pb-gold hover:text-white transition shadow-lg tooltip-trigger" data-tooltip="Add to Wishlist" onclick="event.preventDefault(); event.stopPropagation(); alert('Added to wishlist!');">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="pt-4 text-center">
+                        <a href="product-charcoal-jodhpuri.html" class="inline-block">
+                            <h3 class="font-serif text-lg text-white hover:text-pb-gold transition cursor-pointer">Charcoal Black Jodhpuri</h3>
+                        </a>
+                        <p class="text-pb-gold mt-1">₹ 85,000</p>
+                    </div>
+                </div>
+
+                <!-- Product Card 5: Indo-Western Men -->
+                <div class="product-card group relative reveal" data-category="kurta" style="transition-delay: 0.1s;">
+                    <div class="relative overflow-hidden aspect-[3/4] bg-gray-900">
+                        <a href="product-peach-kurta.html" class="absolute inset-0 z-0 block w-full h-full">
+                            <img src="kp3.png" alt="Indo-Western Men" class="primary-img absolute inset-0 w-full h-full object-cover transition-opacity duration-500 object-top">
+                            <img src="indowestern3.png" alt="Indo-Western Men Detail" class="secondary-img absolute inset-0 w-full h-full object-cover object-top">
+                        </a>
+                        <div class="absolute bottom-4 left-0 w-full flex justify-center space-x-4 opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 z-20">
+                            <button class="w-10 h-10 bg-white/90 backdrop-blur text-pb-dark rounded-full flex items-center justify-center hover:bg-pb-gold hover:text-white transition shadow-lg tooltip-trigger" data-tooltip="Quick View" onclick="openQuickView(event)">
+                                <i class="far fa-eye"></i>
+                            </button>
+                            <button class="w-10 h-10 bg-white/90 backdrop-blur text-pb-dark rounded-full flex items-center justify-center hover:bg-pb-gold hover:text-white transition shadow-lg tooltip-trigger" data-tooltip="Add to Wishlist" onclick="event.preventDefault(); event.stopPropagation(); alert('Added to wishlist!');">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="pt-4 text-center">
+                        <a href="product-peach-kurta.html" class="inline-block">
+                            <h3 class="font-serif text-lg text-white hover:text-pb-gold transition cursor-pointer">Pastel Peach Asymmetric Kurta Set</h3>
+                        </a>
+                        <p class="text-pb-gold mt-1">₹ 42,000</p>
+                    </div>
+                </div>
+
+                <!-- Product Card 6: Velvet Sherwani -->
+                <div class="product-card group relative reveal" data-category="sherwani" style="transition-delay: 0.2s;">
+                    <div class="relative overflow-hidden aspect-[3/4] bg-gray-900">
+                        <a href="product-maroon-sherwani.html" class="absolute inset-0 z-0 block w-full h-full">
+                            <img src="SH3.png" alt="Velvet Sherwani" class="primary-img absolute inset-0 w-full h-full object-cover transition-opacity duration-500 object-top">
+                            <img src="SH1.png" alt="Velvet Sherwani Detail" class="secondary-img absolute inset-0 w-full h-full object-cover object-top">
+                        </a>
+                        <div class="absolute bottom-4 left-0 w-full flex justify-center space-x-4 opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 z-20">
+                            <button class="w-10 h-10 bg-white/90 backdrop-blur text-pb-dark rounded-full flex items-center justify-center hover:bg-pb-gold hover:text-white transition shadow-lg tooltip-trigger" data-tooltip="Quick View" onclick="openQuickView(event)">
+                                <i class="far fa-eye"></i>
+                            </button>
+                            <button class="w-10 h-10 bg-white/90 backdrop-blur text-pb-dark rounded-full flex items-center justify-center hover:bg-pb-gold hover:text-white transition shadow-lg tooltip-trigger" data-tooltip="Add to Wishlist" onclick="event.preventDefault(); event.stopPropagation(); alert('Added to wishlist!');">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="pt-4 text-center">
+                        <a href="product-maroon-sherwani.html" class="inline-block">
+                            <h3 class="font-serif text-lg text-white hover:text-pb-gold transition cursor-pointer">Regal Maroon Velvet Sherwani</h3>
+                        </a>
+                        <p class="text-pb-gold mt-1">₹ 1,45,000</p>
+                    </div>
+                </div>
+
+                <!-- Product Card 7: Kurta Bandi -->
+                <div class="product-card group relative reveal" data-category="kurta" style="transition-delay: 0.3s;">
+                    <div class="relative overflow-hidden aspect-[3/4] bg-gray-900">
+                        <a href="product-ivory-bandi.html" class="absolute inset-0 z-0 block w-full h-full">
+                            <img src="s3.png" alt="Kurta Bandi" class="primary-img absolute inset-0 w-full h-full object-cover transition-opacity duration-500 object-top">
+                            <img src="s4.png" alt="Kurta Bandi Detail" class="secondary-img absolute inset-0 w-full h-full object-cover object-top">
+                        </a>
+                        <div class="absolute bottom-4 left-0 w-full flex justify-center space-x-4 opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 z-20">
+                            <button class="w-10 h-10 bg-white/90 backdrop-blur text-pb-dark rounded-full flex items-center justify-center hover:bg-pb-gold hover:text-white transition shadow-lg tooltip-trigger" data-tooltip="Quick View" onclick="openQuickView(event)">
+                                <i class="far fa-eye"></i>
+                            </button>
+                            <button class="w-10 h-10 bg-white/90 backdrop-blur text-pb-dark rounded-full flex items-center justify-center hover:bg-pb-gold hover:text-white transition shadow-lg tooltip-trigger" data-tooltip="Add to Wishlist" onclick="event.preventDefault(); event.stopPropagation(); alert('Added to wishlist!');">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="pt-4 text-center">
+                        <a href="product-ivory-bandi.html" class="inline-block">
+                            <h3 class="font-serif text-lg text-white hover:text-pb-gold transition cursor-pointer">Ivory Silk Kurta with Floral Bandi</h3>
+                        </a>
+                        <p class="text-pb-gold mt-1">₹ 36,000</p>
+                    </div>
+                </div>
+
+                <!-- Product Card 8: Teal Nehru Jacket Set -->
+                <div class="product-card group relative reveal" data-category="indo-western" style="transition-delay: 0.4s;">
+                    <div class="relative overflow-hidden aspect-[3/4] bg-gray-900">
+                        <a href="product-teal-nehru.html" class="absolute inset-0 z-0 block w-full h-full">
+                            <img src="indowestern3.png" alt="Brocade Jacket" class="primary-img absolute inset-0 w-full h-full object-cover transition-opacity duration-500 object-top">
+                            <img src="s5.png" alt="Brocade Jacket Detail" class="secondary-img absolute inset-0 w-full h-full object-cover object-top">
+                        </a>
+                        <div class="absolute bottom-4 left-0 w-full flex justify-center space-x-4 opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 z-20">
+                            <button class="w-10 h-10 bg-white/90 backdrop-blur text-pb-dark rounded-full flex items-center justify-center hover:bg-pb-gold hover:text-white transition shadow-lg tooltip-trigger" data-tooltip="Quick View" onclick="openQuickView(event)">
+                                <i class="far fa-eye"></i>
+                            </button>
+                            <button class="w-10 h-10 bg-white/90 backdrop-blur text-pb-dark rounded-full flex items-center justify-center hover:bg-pb-gold hover:text-white transition shadow-lg tooltip-trigger" data-tooltip="Add to Wishlist" onclick="event.preventDefault(); event.stopPropagation(); alert('Added to wishlist!');">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="pt-4 text-center">
+                        <a href="product-teal-nehru.html" class="inline-block">
+                            <h3 class="font-serif text-lg text-white hover:text-pb-gold transition cursor-pointer">Teal Brocade Nehru Jacket Set</h3>
+                        </a>
+                        <p class="text-pb-gold mt-1">₹ 48,500</p>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="text-center mt-12 reveal">
+                <a href="man.html" class="inline-block border-b border-pb-gold text-pb-gold uppercase tracking-widest text-sm pb-1 hover:text-white hover:border-white transition">View All Products</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-pb-dark border-t border-pb-gold/10 relative">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 reveal">
+                <p class="text-pb-gold text-sm tracking-[0.3em] uppercase mb-3">Shop By Occasion</p>
+                <h2 class="font-serif text-3xl md:text-5xl text-white mb-4">The Wedding Edit</h2>
+                <p class="text-gray-400 font-light max-w-2xl mx-auto mb-6">Curated traditional Indian attire meticulously crafted for every ceremony of your grand celebration.</p>
+                <div class="w-16 h-px bg-pb-gold mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 h-auto lg:h-[600px]">
+                
+                <!-- Haldi -->
+                <div class="relative group overflow-hidden cursor-pointer h-96 lg:h-full reveal" style="transition-delay: 0.1s;">
+                    <img src="kp3.png" alt="Haldi Collection" class="w-full h-full object-cover transition duration-700 group-hover:scale-105 group-hover:brightness-75 object-top">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                    <div class="absolute inset-0 border border-white/0 group-hover:border-pb-gold/30 transition-all duration-500 m-4"></div>
+                    <div class="absolute bottom-8 left-8 right-8">
+                        <h3 class="font-serif text-2xl text-white mb-2 transform group-hover:-translate-y-2 transition duration-300">The Haldi Edit</h3>
+                        <p class="text-gray-300 text-sm font-light mb-4 opacity-0 group-hover:opacity-100 transition duration-500 delay-100 h-0 lg:h-auto overflow-hidden">Vibrant yellow and mustard kurta sets.</p>
+                        <a href="#" class="inline-block text-pb-gold uppercase tracking-widest text-xs font-semibold border-b border-pb-gold pb-1 opacity-0 group-hover:opacity-100 transition duration-500 delay-200">Explore</a>
+                    </div>
+                </div>
+
+                <!-- Sangeet -->
+                <div class="relative group overflow-hidden cursor-pointer h-96 lg:h-full reveal" style="transition-delay: 0.2s;">
+                    <img src="indowestern2.png" alt="Sangeet Collection" class="w-full h-full object-cover transition duration-700 group-hover:scale-105 group-hover:brightness-75 object-top">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                    <div class="absolute inset-0 border border-white/0 group-hover:border-pb-gold/30 transition-all duration-500 m-4"></div>
+                    <div class="absolute bottom-8 left-8 right-8">
+                        <h3 class="font-serif text-2xl text-white mb-2 transform group-hover:-translate-y-2 transition duration-300">Sangeet Glamour</h3>
+                        <p class="text-gray-300 text-sm font-light mb-4 opacity-0 group-hover:opacity-100 transition duration-500 delay-100 h-0 lg:h-auto overflow-hidden">Midnight blue Indo-Westerns and statement jackets.</p>
+                        <a href="#" class="inline-block text-pb-gold uppercase tracking-widest text-xs font-semibold border-b border-pb-gold pb-1 opacity-0 group-hover:opacity-100 transition duration-500 delay-200">Explore</a>
+                    </div>
+                </div>
+
+                <!-- Wedding -->
+                <div class="relative group overflow-hidden cursor-pointer h-96 lg:h-full reveal" style="transition-delay: 0.3s;">
+                    <img src="SH3.png" alt="Wedding Collection" class="w-full h-full object-cover transition duration-700 group-hover:scale-105 group-hover:brightness-75">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                    <div class="absolute inset-0 border border-white/0 group-hover:border-pb-gold/30 transition-all duration-500 m-4"></div>
+                    <div class="absolute bottom-8 left-8 right-8">
+                        <h3 class="font-serif text-2xl text-white mb-2 transform group-hover:-translate-y-2 transition duration-300">The Royal Pheras</h3>
+                        <p class="text-gray-300 text-sm font-light mb-4 opacity-0 group-hover:opacity-100 transition duration-500 delay-100 h-0 lg:h-auto overflow-hidden">Classic ivory zardosi sherwanis and rich safas.</p>
+                        <a href="#" class="inline-block text-pb-gold uppercase tracking-widest text-xs font-semibold border-b border-pb-gold pb-1 opacity-0 group-hover:opacity-100 transition duration-500 delay-200">Explore</a>
+                    </div>
+                </div>
+
+                <!-- Reception -->
+                <div class="relative group overflow-hidden cursor-pointer h-96 lg:h-full reveal" style="transition-delay: 0.4s;">
+                    <img src="s1.png" alt="Reception Collection" class="w-full h-full object-cover transition duration-700 group-hover:scale-105 group-hover:brightness-75 object-top">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                    <div class="absolute inset-0 border border-white/0 group-hover:border-pb-gold/30 transition-all duration-500 m-4"></div>
+                    <div class="absolute bottom-8 left-8 right-8">
+                        <h3 class="font-serif text-2xl text-white mb-2 transform group-hover:-translate-y-2 transition duration-300">Reception Elegance</h3>
+                        <p class="text-gray-300 text-sm font-light mb-4 opacity-0 group-hover:opacity-100 transition duration-500 delay-100 h-0 lg:h-auto overflow-hidden">Tailored tuxedos and sleek contemporary bandhgalas.</p>
+                        <a href="#" class="inline-block text-pb-gold uppercase tracking-widest text-xs font-semibold border-b border-pb-gold pb-1 opacity-0 group-hover:opacity-100 transition duration-500 delay-200">Explore</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="relative py-32 bg-fixed bg-center bg-cover" style="background-image: url('https://images.unsplash.com/photo-1616422285623-14631346513e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');">
+        <div class="absolute inset-0 bg-black/60"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-2xl mx-auto text-center reveal">
+                <i class="fas fa-crown text-pb-gold text-3xl mb-6"></i>
+                <h2 class="font-serif text-4xl md:text-5xl text-white mb-6 leading-tight">Crafting Legacy, <br>One Thread at a Time.</h2>
+                <p class="text-gray-300 font-light text-lg mb-8 leading-relaxed">For over three decades, Pungliya Brothers has been synonymous with unparalleled craftsmanship and royal aesthetics. Experience the magic of intricate zardosi, rich brocades, and timeless silhouettes.</p>
+                <button class="bg-pb-gold text-pb-dark px-8 py-3 uppercase tracking-widest text-sm font-semibold hover:bg-white transition duration-300">Read Our Story</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-pb-dark border-y border-pb-gold/10">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-pb-gold/20">
+                <div class="p-6 reveal" style="transition-delay: 0.1s;">
+                    <i class="fas fa-video text-3xl text-pb-gold mb-4"></i>
+                    <h4 class="font-serif text-xl text-white mb-2">Virtual Consultation</h4>
+                    <p class="text-gray-400 text-sm font-light">Book a video call with our expert stylists from anywhere in the world.</p>
+                </div>
+                <div class="p-6 reveal" style="transition-delay: 0.2s;">
+                    <i class="fas fa-ruler-combined text-3xl text-pb-gold mb-4"></i>
+                    <h4 class="font-serif text-xl text-white mb-2">Made to Measure</h4>
+                    <p class="text-gray-400 text-sm font-light">Custom tailoring services ensuring the perfect fit for your special day.</p>
+                </div>
+                <div class="p-6 reveal" style="transition-delay: 0.3s;">
+                    <i class="fas fa-globe text-3xl text-pb-gold mb-4"></i>
+                    <h4 class="font-serif text-xl text-white mb-2">Global Delivery</h4>
+                    <p class="text-gray-400 text-sm font-light">Secure and insured worldwide shipping on all premium orders.</p>
+                </div>
+                <div class="p-6 reveal" style="transition-delay: 0.4s;">
+                    <i class="fas fa-gem text-3xl text-pb-gold mb-4"></i>
+                    <h4 class="font-serif text-xl text-white mb-2">Heritage Craft</h4>
+                    <p class="text-gray-400 text-sm font-light">Authentic hand-embroidery by master artisans across India.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="cart-overlay" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 opacity-0 invisible transition-all duration-300"></div>
+    <div id="cart-drawer" class="fixed top-0 right-0 h-full w-full md:w-[450px] bg-pb-dark-light shadow-2xl z-50 transform translate-x-full transition-transform duration-500 ease-in-out flex flex-col border-l border-pb-gold/20">
+        <!-- Cart Header -->
+        <div class="p-6 flex justify-between items-center border-b border-gray-800">
+            <h2 class="font-serif text-2xl text-pb-gold">Shopping Bag (2)</h2>
+            <button id="cart-close-btn" class="text-gray-400 hover:text-white transition text-xl"><i class="fas fa-times"></i></button>
+        </div>
+        
+        <!-- Cart Items (Scrollable) -->
+        <div class="flex-1 overflow-y-auto p-6 space-y-6 hide-scroll">
+            
+            <!-- Item 2 -->
+            <div class="flex gap-4 group">
+                <div class="w-24 h-32 bg-gray-900 flex-shrink-0">
+                    <img src="SH1.png" alt="Sherwani" class="w-full h-full object-cover">
+                </div>
+                <div class="flex-1 flex flex-col justify-between py-1">
+                    <div>
+                        <div class="flex justify-between">
+                            <h4 class="font-serif text-white group-hover:text-pb-gold transition">Royal Ivory Silk Sherwani</h4>
+                            <button class="text-gray-500 hover:text-red-500"><i class="far fa-trash-alt"></i></button>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-1">Size: 40 | Color: Ivory/Gold</p>
+                    </div>
+                    <div class="flex justify-between items-end mt-4">
+                        <div class="flex items-center border border-gray-700 rounded-sm">
+                            <button class="px-3 py-1 text-gray-400 hover:text-white">-</button>
+                            <span class="px-2 text-sm">1</span>
+                            <button class="px-3 py-1 text-gray-400 hover:text-white">+</button>
+                        </div>
+                        <p class="text-pb-gold font-medium">₹ 1,85,000</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Item 1: Kurta -->
+            <div class="flex gap-4 group">
+                <div class="w-24 h-32 bg-gray-900 flex-shrink-0">
+                    <img src="kp1.png" alt="Kurta Set" class="w-full h-full object-cover">
+                </div>
+                <div class="flex-1 flex flex-col justify-between py-1">
+                    <div>
+                        <div class="flex justify-between">
+                            <h4 class="font-serif text-white group-hover:text-pb-gold transition">Dusty Rose Chikankari Kurta</h4>
+                            <button class="text-gray-500 hover:text-red-500"><i class="far fa-trash-alt"></i></button>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-1">Size: Custom | Color: Dusty Rose</p>
+                    </div>
+                    <div class="flex justify-between items-end mt-4">
+                        <div class="flex items-center border border-gray-700 rounded-sm">
+                            <button class="px-3 py-1 text-gray-400 hover:text-white">-</button>
+                            <span class="px-2 text-sm">1</span>
+                            <button class="px-3 py-1 text-gray-400 hover:text-white">+</button>
+                        </div>
+                        <p class="text-pb-gold font-medium">₹ 28,000</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cart Footer -->
+        <div class="p-6 border-t border-gray-800 bg-pb-dark">
+            <div class="flex justify-between text-lg mb-4">
+                <span class="font-serif text-white">Subtotal</span>
+                <span class="text-pb-gold font-medium">₹ 2,13,000</span>
+            </div>
+            <p class="text-xs text-gray-400 mb-6">Taxes and shipping calculated at checkout.</p>
+            <button class="w-full bg-pb-gold text-pb-dark py-4 uppercase tracking-widest text-sm font-bold hover:bg-white transition duration-300 shadow-[0_0_15px_rgba(197,160,89,0.3)]">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Quick View updated to show a Sherwani -->
+    <div id="quick-view-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[60] flex items-center justify-center opacity-0 invisible transition-all duration-300 p-4">
+        <div class="bg-pb-dark-light w-full max-w-5xl rounded-sm shadow-2xl overflow-hidden flex flex-col md:flex-row max-h-[90vh] transform scale-95 transition-transform duration-300 relative border border-pb-gold/20" id="quick-view-content">
+            <button onclick="closeQuickView()" class="absolute top-4 right-4 z-10 w-10 h-10 bg-black/50 rounded-full text-white hover:bg-pb-gold transition flex items-center justify-center"><i class="fas fa-times"></i></button>
+            
+            <!-- Image Gallery -->
+            <div class="w-full md:w-1/2 bg-black p-8 flex items-center justify-center relative">
+                <div class="absolute top-4 left-4 bg-pb-gold text-pb-dark text-[10px] uppercase font-bold px-2 py-1 tracking-wider z-10">AI Try-On Available</div>
+                <img src="SH1.png" alt="Product" class="max-h-[60vh] object-contain">
+                <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
+                    <button class="w-2 h-2 rounded-full bg-pb-gold"></button>
+                    <button class="w-2 h-2 rounded-full bg-gray-600"></button>
+                    <button class="w-2 h-2 rounded-full bg-gray-600"></button>
+                </div>
+            </div>
+            
+            <!-- Details -->
+            <div class="w-full md:w-1/2 p-8 md:p-12 overflow-y-auto hide-scroll text-left">
+                <div class="flex items-center text-pb-gold text-xs mb-2 space-x-1">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                    <span class="text-gray-400 ml-2">(24 Reviews)</span>
+                </div>
+                <h2 class="font-serif text-3xl text-white mb-2">Royal Ivory Silk Sherwani</h2>
+                <p class="text-2xl text-pb-gold mb-6">₹ 1,85,000 <span class="text-sm text-gray-500 line-through ml-2">₹ 2,10,000</span></p>
+                
+                <p class="text-gray-400 text-sm font-light leading-relaxed mb-6">Exquisite ivory raw silk sherwani featuring intricate hand-embroidery. Paired with a tailored kurta and matching churidar.</p>
+                
+                <div class="mb-6">
+                    <div class="flex justify-between mb-2">
+                        <span class="text-sm text-white uppercase tracking-wider">Size</span>
+                        <a href="#" class="text-xs text-pb-gold underline">Size Guide</a>
+                    </div>
+                    <div class="flex space-x-3">
+                        <button class="w-10 h-10 border border-gray-600 text-gray-300 hover:border-pb-gold hover:text-pb-gold transition">38</button>
+                        <button class="w-10 h-10 border border-pb-gold text-pb-gold bg-pb-gold/10 transition">40</button>
+                        <button class="w-10 h-10 border border-gray-600 text-gray-300 hover:border-pb-gold hover:text-pb-gold transition">42</button>
+                        <button class="px-4 h-10 border border-gray-600 text-gray-300 hover:border-pb-gold hover:text-pb-gold transition text-sm">Custom</button>
+                    </div>
+                </div>
+
+                <div class="flex space-x-4 mb-8">
+                    <button class="flex-1 bg-pb-gold text-pb-dark py-3 uppercase tracking-widest text-sm font-bold hover:bg-white transition duration-300" onclick="alert('Added to bag!')">Add to Bag</button>
+                    <button class="w-12 h-12 border border-gray-600 text-gray-300 flex items-center justify-center hover:border-pb-gold hover:text-pb-gold transition rounded-sm"><i class="far fa-heart"></i></button>
+                </div>
+                
+                <div class="border-t border-gray-800 pt-6 text-sm text-gray-400 space-y-3">
+                    <p><i class="fas fa-truck text-pb-gold w-6"></i> Ships in 4-6 weeks (Made to order)</p>
+                    <p><i class="fas fa-undo text-pb-gold w-6"></i> 7-Day Return Policy</p>
+                    <p><i class="fab fa-whatsapp text-pb-gold w-6"></i> <a href="#" class="hover:text-pb-gold transition border-b border-transparent hover:border-pb-gold">Chat with a Stylist</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-[#050505] pt-20 pb-10 border-t border-pb-gold/30">
+        <div class="container mx-auto px-4 md:px-8">
+            <!-- Newsletter -->
+            <div class="text-center max-w-2xl mx-auto mb-20 reveal">
+                <h3 class="font-serif text-3xl text-pb-gold mb-4">Join The Inner Circle</h3>
+                <p class="text-gray-400 font-light mb-8">Subscribe to receive exclusive access to new collections, private sales, and styling editorials.</p>
+                <form class="flex flex-col sm:flex-row gap-4" onsubmit="event.preventDefault(); alert('Subscribed!');">
+                    <input type="email" placeholder="Email Address" required class="flex-1 bg-transparent border-b border-gray-700 px-4 py-3 text-white focus:outline-none focus:border-pb-gold transition rounded-none">
+                    <button type="submit" class="bg-pb-gold text-pb-dark px-8 py-3 uppercase tracking-widest text-sm font-bold hover:bg-white transition">Subscribe</button>
+                </form>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16 border-t border-gray-800 pt-16">
+                <!-- Brand Info -->
+                <div>
+                    <h2 class="font-serif text-2xl text-pb-gold tracking-widest uppercase font-bold mb-6">Pungliya <br><span class="font-light text-white text-xs tracking-[0.4em]">Brothers</span></h2>
+                    <p class="text-gray-400 font-light text-sm leading-relaxed mb-6">Defining luxury Indian ethnic wear since 1990. Celebrating the modern groom with timeless craftsmanship.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center text-gray-400 hover:text-pb-gold hover:border-pb-gold transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center text-gray-400 hover:text-pb-gold hover:border-pb-gold transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center text-gray-400 hover:text-pb-gold hover:border-pb-gold transition"><i class="fab fa-pinterest-p"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center text-gray-400 hover:text-pb-gold hover:border-pb-gold transition"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <!-- Links 1 -->
+                <div>
+                    <h4 class="text-white uppercase tracking-widest text-sm font-semibold mb-6">Shop</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm font-light">
+                        <li><a href="#" class="hover:text-pb-gold transition">New Arrivals</a></li>
+                        <li><a href="#" class="hover:text-pb-gold transition">Groom's Edit</a></li>
+                        <li><a href="#" class="hover:text-pb-gold transition">Festive Wear</a></li>
+                        <li><a href="#" class="hover:text-pb-gold transition">Indo-Western</a></li>
+                        <li><a href="#" class="hover:text-pb-gold transition">Accessories</a></li>
+                    </ul>
+                </div>
+
+                <!-- Links 2 -->
+                <div>
+                    <h4 class="text-white uppercase tracking-widest text-sm font-semibold mb-6">Customer Care</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm font-light">
+                        <li><a href="#" class="hover:text-pb-gold transition">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-pb-gold transition">Shipping & Returns</a></li>
+                        <li><a href="#" class="hover:text-pb-gold transition">Order Tracking</a></li>
+                        <li><a href="#" class="hover:text-pb-gold transition">Size Guide</a></li>
+                        <li><a href="#" class="hover:text-pb-gold transition">Book Appointment</a></li>
+                    </ul>
+                </div>
+
+                <!-- Store Info -->
+                <div>
+                    <h4 class="text-white uppercase tracking-widest text-sm font-semibold mb-6">Flagship Store</h4>
+                    <address class="text-gray-400 text-sm font-light not-italic leading-relaxed mb-4">
+                        123 Luxury Boulevard,<br>
+                        Jubilee Hills, Hyderabad,<br>
+                        Telangana 500033, India
+                    </address>
+                    <p class="text-gray-400 text-sm font-light mb-2"><i class="fas fa-phone mr-2 text-pb-gold"></i> +91 98765 43210</p>
+                    <p class="text-gray-400 text-sm font-light"><i class="fas fa-envelope mr-2 text-pb-gold"></i> concierge@pungliyabrothers.com</p>
+                </div>
+            </div>
+
+            <!-- Bottom -->
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
+                <p>&copy; 2026 Pungliya Brothers. All Rights Reserved.</p>
+                <div class="flex space-x-4 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white transition">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition">Terms of Service</a>
+                </div>
+                <!-- Payment Badges (Mock) -->
+                <div class="flex space-x-3 mt-4 md:mt-0 text-xl text-gray-600">
+                    <i class="fab fa-cc-visa hover:text-white transition"></i>
+                    <i class="fab fa-cc-mastercard hover:text-white transition"></i>
+                    <i class="fab fa-cc-amex hover:text-white transition"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- Sticky Header Logic ---
+            const header = document.getElementById('main-header');
+            let lastScroll = 0;
+            
+            window.addEventListener('scroll', () => {
+                const currentScroll = window.pageYOffset;
+                
+                if (currentScroll > 50) {
+                    header.classList.add('shadow-lg', 'bg-pb-dark/80');
+                    header.style.top = '0';
+                } else {
+                    header.classList.remove('shadow-lg', 'bg-pb-dark/80');
+                    header.style.top = '32px'; // Height of top announcement bar
+                }
+                lastScroll = currentScroll;
+            });
+
+            // --- Mobile Menu Logic ---
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const closeMobileBtn = document.getElementById('mobile-close-btn');
+            const mobileSidebar = document.getElementById('mobile-sidebar');
+
+            mobileBtn.addEventListener('click', () => {
+                mobileSidebar.classList.remove('-translate-x-full');
+            });
+
+            closeMobileBtn.addEventListener('click', () => {
+                mobileSidebar.classList.add('-translate-x-full');
+            });
+
+            // --- Cart Drawer Logic ---
+            const cartOpenBtn = document.getElementById('cart-open-btn');
+            const cartCloseBtn = document.getElementById('cart-close-btn');
+            const cartDrawer = document.getElementById('cart-drawer');
+            const cartOverlay = document.getElementById('cart-overlay');
+
+            function openCart() {
+                cartDrawer.classList.remove('translate-x-full');
+                cartOverlay.classList.remove('opacity-0', 'invisible');
+                cartOverlay.classList.add('opacity-100', 'visible');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            }
+
+            function closeCart() {
+                cartDrawer.classList.add('translate-x-full');
+                cartOverlay.classList.remove('opacity-100', 'visible');
+                cartOverlay.classList.add('opacity-0', 'invisible');
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+
+            cartOpenBtn.addEventListener('click', openCart);
+            cartCloseBtn.addEventListener('click', closeCart);
+            cartOverlay.addEventListener('click', closeCart);
+
+            // --- Hero Slider Logic ---
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prev-slide');
+            const nextBtn = document.getElementById('next-slide');
+            let currentSlide = 0;
+            let slideInterval;
+
+            function showSlide(index) {
+                slides.forEach(slide => {
+                    slide.classList.remove('active');
+                    slide.classList.add('inactive');
+                });
+                slides[index].classList.remove('inactive');
+                slides[index].classList.add('active');
+            }
+
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % slides.length;
+                showSlide(currentSlide);
+            }
+
+            function prevSlide() {
+                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                showSlide(currentSlide);
+            }
+
+            nextBtn.addEventListener('click', () => {
+                nextSlide();
+                resetInterval();
+            });
+
+            prevBtn.addEventListener('click', () => {
+                prevSlide();
+                resetInterval();
+            });
+
+            function startInterval() {
+                slideInterval = setInterval(nextSlide, 6000); // 6 seconds per slide
+            }
+
+            function resetInterval() {
+                clearInterval(slideInterval);
+                startInterval();
+            }
+            startInterval();
+
+            // --- Scroll Reveal Animation (Intersection Observer) ---
+            const revealElements = document.querySelectorAll('.reveal');
+            
+            const revealOptions = {
+                threshold: 0.15,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target); // Run once
+                    }
+                });
+            }, revealOptions);
+
+            revealElements.forEach(el => {
+                revealOnScroll.observe(el);
+            });
+
+            // --- Trending Now Filtering Logic ---
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const productCards = document.querySelectorAll('#product-grid .product-card');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Update active state styling
+                    filterBtns.forEach(b => {
+                        b.classList.remove('text-pb-gold', 'font-semibold');
+                        b.classList.add('text-gray-500');
+                    });
+                    btn.classList.add('text-pb-gold', 'font-semibold');
+                    btn.classList.remove('text-gray-500');
+
+                    const filterValue = btn.getAttribute('data-filter');
+
+                    // Filter logic
+                    productCards.forEach(card => {
+                        if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                            card.style.display = 'block';
+                            // Re-trigger reveal animation smoothly
+                            card.classList.remove('active');
+                            setTimeout(() => card.classList.add('active'), 50);
+                        } else {
+                            card.style.display = 'none';
+                            card.classList.remove('active');
+                        }
+                    });
+                });
+            });
+
+        });
+
+        // --- Quick View Modal Logic (Global functions for onclick) ---
+        const quickViewModal = document.getElementById('quick-view-modal');
+        const quickViewContent = document.getElementById('quick-view-content');
+
+        window.openQuickView = function(e) {
+            // Prevent event from bubbling up to the anchor tag
+            if(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            quickViewModal.classList.remove('opacity-0', 'invisible');
+            quickViewModal.classList.add('opacity-100', 'visible');
+            setTimeout(() => {
+                quickViewContent.classList.remove('scale-95');
+                quickViewContent.classList.add('scale-100');
+            }, 50);
+            document.body.style.overflow = 'hidden';
+        }
+
+        window.closeQuickView = function() {
+            quickViewContent.classList.remove('scale-100');
+            quickViewContent.classList.add('scale-95');
+            setTimeout(() => {
+                quickViewModal.classList.remove('opacity-100', 'visible');
+                quickViewModal.classList.add('opacity-0', 'invisible');
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        // Close on clicking outside modal
+        quickViewModal.addEventListener('click', (e) => {
+            if (e.target === quickViewModal) {
+                closeQuickView();
+            }
+        });
+    </script>
+</body>
+</html>
